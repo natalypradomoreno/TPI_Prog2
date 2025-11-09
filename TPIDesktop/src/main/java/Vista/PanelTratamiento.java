@@ -17,7 +17,7 @@ import java.awt.*;
  */
 public class PanelTratamiento extends JPanel {
 
-    private JTextField txtCodigoQR;
+        private JTextField txtCodigoTratamiento;
     private JTextField txtNombreTratamiento;
     private JTextField txtMedicamento;
     private JButton btnGuardar;
@@ -25,9 +25,9 @@ public class PanelTratamiento extends JPanel {
     public PanelTratamiento() {
         setLayout(new GridLayout(4, 2, 5, 5));
 
-        add(new JLabel("Código QR del gato:"));
-        txtCodigoQR = new JTextField();
-        add(txtCodigoQR);
+        add(new JLabel("Código Tratamiento:"));
+        txtCodigoTratamiento = new JTextField();
+        add(txtCodigoTratamiento);
 
         add(new JLabel("Nombre del tratamiento:"));
         txtNombreTratamiento = new JTextField();
