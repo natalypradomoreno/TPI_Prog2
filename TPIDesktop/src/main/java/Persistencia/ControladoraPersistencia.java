@@ -15,7 +15,6 @@ public class ControladoraPersistencia {
     private final EstudiosJpaController estudiosJpa = new EstudiosJpaController(JPAUtil.getEMF());
     private final TareaJpaController tareaJpa = new TareaJpaController(JPAUtil.getEMF());
     private final ZonaJpaController zonaJpa = new ZonaJpaController(JPAUtil.getEMF());
-    private final PuntoJpaController puntoJpa = new PuntoJpaController(JPAUtil.getEMF());
     private final HogarJpaController hogarJpa = new HogarJpaController(JPAUtil.getEMF());
     private final VisitaJpaController visitaJpa = new VisitaJpaController(JPAUtil.getEMF());
     private final CalendarioJpaController calendarioJpa = new CalendarioJpaController(JPAUtil.getEMF());

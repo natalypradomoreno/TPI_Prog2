@@ -12,41 +12,43 @@ package Persistencia;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
-
-/**
- * Clase para manejar la conexión con la base de datos usando JPA.
- * Básicamente, es la que se encarga de abrir y cerrar la "puerta" a la BD 💻
+/*
+ Clase de utilidad para manejar la conexión global a la base de datos mediante JPA.
+ Se usa para crear un único EntityManagerFactory que se comparte en todo el proyecto.
  */
+
 public class JPAUtil {
 
-    // Nombre de la unidad de persistencia (tiene que ser el mismo que pusimos en el persistence.xml)
+    // Nombre del "persistence-unit" definido en persistence.xml
     private static final String PERSISTENCE_UNIT_NAME = "TPIPU";
 
-    // Acá guardamos la fábrica (la que crea los "EntityManager", o sea los que charlan con la BD)
+    // Instancia única (Singleton) del EntityManagerFactory
     private static EntityManagerFactory emf;
 
-    /**
-     * Este método devuelve la fábrica de conexiones (EntityManagerFactory)
-     * Si todavía no existe, la crea una sola vez y después la reutiliza.
-     * Así no estamos abriendo mil conexiones al pedo cada vez que usamos la BD 😅
-     * @return 
+    /*
+     Devuelve el EntityManagerFactory global.
+     Si todavía no está inicializado, lo crea una sola vez.
      */
     public static EntityManagerFactory getEMF() {
         if (emf == null) {
-            emf = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_NAME);
-            System.out.println("Conexión JPA inicializada con éxito (TPIPU).");
+            try {
+                emf = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_NAME);
+                System.out.println("Conexión JPA inicializada correctamente (" + PERSISTENCE_UNIT_NAME + ").");
+            } catch (Exception e) {
+                System.out.println("Error al inicializar la conexión JPA: " + e.getMessage());
+                e.printStackTrace();
+            }
         }
         return emf;
     }
 
-    /**
-     * Este método cierra la fábrica cuando ya no la necesitamos más.
-     * Es como decirle: “che, listo, terminamos, cerrá todo y andate a dormir 😴”
+    /*
+     Cierra la conexión global (por ejemplo, al salir de la aplicación).
      */
-    public static void close() {
+    public static void cerrarConexion() {
         if (emf != null && emf.isOpen()) {
             emf.close();
-            System.out.println("🔒 Conexión JPA cerrada correctamente.");
+            System.out.println("Conexión JPA cerrada correctamente.");
         }
     }
 }

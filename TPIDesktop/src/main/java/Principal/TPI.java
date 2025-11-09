@@ -1,42 +1,40 @@
 package Principal;
 
-/* Este proyecto sigue el patron de diseño MVC y Utiliza JPA 
-para persistir los datos en una base de datos MySQL
-Utilizando PHPMyAdmin con XAMP
-Nombre de la base de datos: tpipa
-Integrantes del grupo:
--Romero, Micaela Denisse
--Toledo,Alejandro Emiliano*/
-
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
-import modelo.Usuario;
+import Vista.VentanaLogin;
 
+/*
+ Clase principal que inicia la aplicación del sistema de gestión de gatos.
+ Inicializa la conexión JPA (unidad de persistencia TPIPU) y abre la ventana de login.
+ */
 public class TPI {
+
     public static void main(String[] args) {
+        EntityManagerFactory emf = null;
+        EntityManager em = null;
+
         try {
-            System.out.println("Iniciando conexión con JPA...");
+            // Inicializa la unidad de persistencia (opcional, fuerza la conexión al inicio)
+            emf = Persistence.createEntityManagerFactory("TPIPU");
+            em = emf.createEntityManager();
+            System.out.println("Conexión JPA inicializada correctamente.");
 
-            EntityManagerFactory emf = Persistence.createEntityManagerFactory("TPIPU");
-            EntityManager em = emf.createEntityManager();
+            // Abre la ventana principal de inicio de sesión
+            javax.swing.SwingUtilities.invokeLater(() -> {
+                new VentanaLogin().setVisible(true);
+            });
 
-            em.getTransaction().begin();
-
-            Usuario nuevo = new Usuario();
-            nuevo.setUsername("admin");
-            nuevo.setContrasenia("root");
-            nuevo.setCorreo("admin@test.com");
-
-            em.persist(nuevo);
-            em.getTransaction().commit();
-
-            em.close();
-            emf.close();
-
-            System.out.println("Conexión exitosa. Usuario guardado en la base.");
         } catch (Exception e) {
+            System.err.println("Error al iniciar la aplicación: " + e.getMessage());
             e.printStackTrace();
+        } finally {
+            // Cierra la conexión si estaba abierta (por seguridad)
+            if (em != null && em.isOpen()) em.close();
+            if (emf != null && emf.isOpen()) emf.close();
         }
     }
 }
+
+

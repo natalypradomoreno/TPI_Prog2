@@ -1,104 +1,10 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
-
 package Controlador;
-
-import Modelo.Persona;
-import Persistencia.ControladoraPersistencia;
-import java.util.List;
-
-//controladora logica de VListarUsuarios
-public class ControladorUsuarios {
-
-    //instacias de las clases involucradas
-    Persona Usr = new Persona();
-    ControladoraPersistencia CtrlPer = new ControladoraPersistencia();
-
-    //metodos intermediarios entre el controlador de CRUD y la vista
-    public List<Persona> LeerUsuarios() {
-        return CtrlPer.LeerUsuarios();
-    }
-
-    public void EscribirUsuario(String Nombre, String Direccion, String Correo, String Contra) {
-        Usr.setNombre(Nombre);
-        Usr.setDireccion(Direccion);
-        Usr.setCorreo(Correo);
-        Usr.setContra(Contra);
-        CtrlPer.EscribirUsuario(Usr);
-    }
-
-    public void EliminarUsuario(int id) {
-        CtrlPer.EliminarUsuario(id);
-    }
-
-    public Persona BuscarUsuario(int id) {
-        return CtrlPer.BuscarUsuario(id);
-    }
-
-    public void EditarUsuario(Persona Usr, String Nombre, String Direccion, String Correo, String Contra) {
-        Usr.setNombre(Nombre);
-        Usr.setDireccion(Direccion);
-        Usr.setCorreo(Correo);
-        Usr.setContra(Contra);
-        CtrlPer.EditarUsuario(Usr);
-    }
-}
-
-
-package Controlador;
-
-import java.util.List;
-import modelo.Usuario;
-import Persistencia.UsuarioJpaController;
-import Persistencia.JPAUtil;
-
-public class ControladorUsuarios {
-
-    private final UsuarioJpaController usuarioJpa;
-
-    public ControladorUsuarios() {
-        usuarioJpa = new UsuarioJpaController(JPAUtil.getEMF());
-    }
-
-    public void crearUsuario(Usuario u) {
-        usuarioJpa.create(u);
-    }
-
-    public List<Usuario> listarUsuarios() {
-        return usuarioJpa.findUsuarioEntities();
-    }
-    // -----------------------------
-    // VALIDACIÓN DE LOGIN
-    // -----------------------------
-    /**
-     * Valida si el usuario y contraseña existen en la base de datos.
-     * Si coincide, devuelve el objeto Usuario con todos sus datos (incluyendo el rol).
-     * Si no coincide, devuelve null.
-     * @param username
-     * @param contrasenia
-     * @return 
-
-    public Usuario validarUsuario(String username, String contrasenia) {
-        List<Usuario> lista = usuarioJpa.findUsuarioEntities();
-        for (Usuario u : lista) {
-            if (u.getUsername().equalsIgnoreCase(username)
-                    && u.getContrasenia().equals(contrasenia)) {
-                return u; // usuario válido → devuelve el objeto completo
-            }
-        }
-        return null; // no coincide
-    }
-}
- */
-
-package Controlador;
-
 
 import Persistencia.JPAUtil;
 import Persistencia.UsuarioJpaController;
-import java.util.List;
 import modelo.Usuario;
+import javax.persistence.*;
+import java.util.List;
 
 /*
  Controlador para manejar los usuarios.
@@ -121,6 +27,7 @@ public class ControladorUsuarios {
             usuarioJpa.create(u);
         } catch (Exception e) {
             System.out.println("Error al crear usuario: " + e.getMessage());
+            e.printStackTrace();
         }
     }
 
@@ -132,28 +39,57 @@ public class ControladorUsuarios {
     }
 
     /*
-     Valida si el usuario y contraseña existen.
-     Si todo está bien, devuelve el objeto Usuario encontrado.
+     Valida si el usuario y contraseña existen en la base de datos.
+     Si todo está bien, devuelve el objeto Usuario completo.
      Si no, devuelve null.
      */
     public Usuario validarUsuario(String username, String contrasenia) {
-        List<Usuario> usuarios = listarUsuarios();
+        EntityManager em = null;
+        Usuario usuario = null;
 
-        for (Usuario u : usuarios) {
-            // Compara el nombre y contraseña (sin importar mayúsculas)
-            if (u.getUsername().equalsIgnoreCase(username) && u.getContrasenia().equals(contrasenia)) {
-                System.out.println("Login correcto, rol: " + u.getRol());
-                return u;
+        try {
+            // Se usa el mismo EntityManagerFactory que el resto del proyecto (desde JPAUtil)
+            em = JPAUtil.getEMF().createEntityManager();
+
+            TypedQuery<Usuario> query = em.createQuery(
+                "SELECT u FROM Usuario u WHERE u.username = :user AND u.contrasenia = :pass",
+                Usuario.class
+            );
+            query.setParameter("user", username);
+            query.setParameter("pass", contrasenia);
+
+            usuario = query.getResultStream().findFirst().orElse(null);
+
+            if (usuario != null) {
+                System.out.println("DEBUG (Controlador) >> Usuario encontrado: " + usuario.getUsername());
+                System.out.println("DEBUG (Controlador) >> Rol: " + usuario.getRol());
+                System.out.println("DEBUG (Controlador) >> ID: " + usuario.getIdUsuario());
+            } else {
+                System.out.println("DEBUG (Controlador) >> No se encontró usuario con esas credenciales.");
             }
+
+        } catch (Exception e) {
+            System.out.println("Error al validar usuario: " + e.getMessage());
+            e.printStackTrace();
+        } finally {
+            if (em != null && em.isOpen()) em.close();
         }
-        System.out.println("Login fallido: usuario o contraseña incorrectos.");
-        return null;
+
+        return usuario;
     }
 
     /*
-     Este método sirve si más adelante querés validar permisos según el rol.
+     Método auxiliar si más adelante querés validar permisos por rol.
      */
     public boolean esRol(Usuario u, String rolBuscado) {
-        return u != null && u.getRol().equalsIgnoreCase(rolBuscado);
+        return u != null && u.getRol() != null && u.getRol().equalsIgnoreCase(rolBuscado);
     }
+    public void modificarUsuario(Usuario u) throws Exception {
+    usuarioJpa.edit(u);
+}
+
+public void eliminarUsuario(int id) throws Exception {
+    usuarioJpa.destroy(id);
+}
+
 }

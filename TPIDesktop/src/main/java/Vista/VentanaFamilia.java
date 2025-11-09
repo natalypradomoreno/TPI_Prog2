@@ -11,6 +11,7 @@ package Vista;
 
 import javax.swing.*;
 import java.awt.*;
+import modelo.FamiliaUsuario;
 
 /*
  Ventana del rol Familia Adoptante con panel de visitas.
@@ -21,7 +22,7 @@ public class VentanaFamilia extends JFrame {
     private JButton btnSalir;
     private JPanel panelCentral;
 
-    public VentanaFamilia() {
+    public VentanaFamilia(FamiliaUsuario fam) {
         setTitle("Panel Familia Adoptante");
         setSize(500, 400);
         setLocationRelativeTo(null);

@@ -6,7 +6,6 @@
 
 /**
  *
- 
 
 public class Usuario {
     private int ID_Usuario;
@@ -28,9 +27,7 @@ public class Usuario {
    */
 
 package modelo;
-
 import java.io.Serializable;
-import java.util.Date;
 import javax.persistence.*;
 
 @Entity
@@ -40,47 +37,65 @@ public class Usuario implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "idUsuario")
     private int idUsuario;
 
+    @Column(name = "username", nullable = false, unique = true)
     private String username;
-    private String correo;
+
+    @Column(name = "contrasenia", nullable = false)
     private String contrasenia;
+
+    @Column(name = "telefono")
     private int telefono;
 
-    @Temporal(TemporalType.DATE)
-    private Date fechaAlta;
-
+    @Column(name = "rol")
     private String rol;
 
+    // Constructor vacío requerido por JPA
     public Usuario() {}
 
-    public Usuario(String username, String correo, String contrasenia, int telefono, Date fechaAlta, String rol) {
+    // Constructor completo (por si se quiere crear un usuario completo)
+    public Usuario(String username, String contrasenia, int telefono, String rol) {
         this.username = username;
-        this.correo = correo;
         this.contrasenia = contrasenia;
         this.telefono = telefono;
-        this.fechaAlta = fechaAlta;
+        this.rol = rol;
+    }
+
+    // Constructor corto (para carga inicial o pruebas)
+    public Usuario(String username, String contrasenia, String rol) {
+        this.username = username;
+        this.contrasenia = contrasenia;
         this.rol = rol;
     }
 
     // Métodos base
-    public void registrarse() {}
     public void iniciarSesion() {}
     public void cerrarSesion() {}
 
-    // Getters & Setters
+    // Getters y Setters
     public int getIdUsuario() { return idUsuario; }
     public void setIdUsuario(int idUsuario) { this.idUsuario = idUsuario; }
+
     public String getUsername() { return username; }
     public void setUsername(String username) { this.username = username; }
-    public String getCorreo() { return correo; }
-    public void setCorreo(String correo) { this.correo = correo; }
+
     public String getContrasenia() { return contrasenia; }
     public void setContrasenia(String contrasenia) { this.contrasenia = contrasenia; }
+
     public int getTelefono() { return telefono; }
     public void setTelefono(int telefono) { this.telefono = telefono; }
-    public Date getFechaAlta() { return fechaAlta; }
-    public void setFechaAlta(Date fechaAlta) { this.fechaAlta = fechaAlta; }
+
     public String getRol() { return rol; }
     public void setRol(String rol) { this.rol = rol; }
+
+    @Override
+    public String toString() {
+        return "Usuario{" + 
+                "idUsuario=" + idUsuario + 
+                ", username='" + username + '\'' + 
+                ", rol='" + rol + '\'' + 
+                '}';
+    }
 }

@@ -17,20 +17,108 @@ import Persistencia.exceptions.NonexistentEntityException;
 
 public class TareaJpaController implements Serializable {
 
-    public TareaJpaController(EntityManagerFactory emf) { this.emf = emf; }
-    public TareaJpaController() { emf = Persistence.createEntityManagerFactory("TPIPU"); }
     private EntityManagerFactory emf = null;
-    public EntityManager getEntityManager() { return emf.createEntityManager(); }
 
-    public void create(Tarea obj) { EntityManager em = getEntityManager(); em.getTransaction().begin(); em.persist(obj); em.getTransaction().commit(); em.close(); }
+    // --- CONSTRUCTORES ---
+    public TareaJpaController(EntityManagerFactory emf) {
+        this.emf = emf;
+    }
 
-    public void edit(Tarea obj) throws NonexistentEntityException, Exception { EntityManager em = getEntityManager(); em.getTransaction().begin(); em.merge(obj); em.getTransaction().commit(); em.close(); }
+    public TareaJpaController() {
+        this.emf = Persistence.createEntityManagerFactory("TPIPU");
+    }
 
-    public void destroy(int id) throws NonexistentEntityException { EntityManager em = getEntityManager(); em.getTransaction().begin(); Tarea o = em.getReference(Tarea.class, id); em.remove(o); em.getTransaction().commit(); em.close(); }
+    // --- OBTENER ENTITY MANAGER ---
+    public EntityManager getEntityManager() {
+        return emf.createEntityManager();
+    }
 
-    public List<Tarea> findTareaEntities() { EntityManager em = getEntityManager(); Query q = em.createQuery("SELECT o FROM Tarea o"); List<Tarea> l = q.getResultList(); em.close(); return l; }
+    // --- CREAR ---
+    public void create(Tarea tarea) {
+        EntityManager em = getEntityManager();
+        try {
+            em.getTransaction().begin();
+            em.persist(tarea);
+            em.getTransaction().commit();
+            System.out.println("DEBUG >> Tarea creada con ID: " + tarea.getIdTarea());
+        } catch (Exception e) {
+            if (em.getTransaction().isActive()) em.getTransaction().rollback();
+            System.err.println("Error al crear tarea: " + e.getMessage());
+            throw e;
+        } finally {
+            em.close();
+        }
+    }
 
-    public Tarea findTarea(int id) { EntityManager em = getEntityManager(); Tarea o = em.find(Tarea.class, id); em.close(); return o; }
+    // --- EDITAR ---
+    public void edit(Tarea tarea) throws NonexistentEntityException, Exception {
+        EntityManager em = getEntityManager();
+        try {
+            em.getTransaction().begin();
+            if (findTarea(tarea.getIdTarea()) == null) {
+                throw new NonexistentEntityException("La tarea con ID " + tarea.getIdTarea() + " no existe.");
+            }
+            em.merge(tarea);
+            em.getTransaction().commit();
+        } catch (Exception e) {
+            if (em.getTransaction().isActive()) em.getTransaction().rollback();
+            throw e;
+        } finally {
+            em.close();
+        }
+    }
 
-    public int getTareaCount() { EntityManager em = getEntityManager(); Query q = em.createQuery("SELECT COUNT(o) FROM Tarea o"); Long c = (Long) q.getSingleResult(); em.close(); return c.intValue(); }
+    // --- ELIMINAR ---
+    public void destroy(int id) throws NonexistentEntityException {
+        EntityManager em = getEntityManager();
+        try {
+            em.getTransaction().begin();
+            Tarea tarea = em.find(Tarea.class, id);
+            if (tarea == null) {
+                throw new NonexistentEntityException("La tarea con ID " + id + " no existe.");
+            }
+            em.remove(tarea);
+            em.getTransaction().commit();
+        } catch (NonexistentEntityException e) {
+            throw e;
+        } catch (Exception e) {
+            if (em.getTransaction().isActive()) em.getTransaction().rollback();
+            throw new RuntimeException("Error al eliminar la tarea: " + e.getMessage());
+        } finally {
+            em.close();
+        }
+    }
+
+    // --- LISTAR TODAS ---
+    public List<Tarea> findTareaEntities() {
+        EntityManager em = getEntityManager();
+        try {
+            Query q = em.createQuery("SELECT t FROM Tarea t");
+            return q.getResultList();
+        } finally {
+            em.close();
+        }
+    }
+
+    // --- BUSCAR POR ID ---
+    public Tarea findTarea(int id) {
+        EntityManager em = getEntityManager();
+        try {
+            return em.find(Tarea.class, id);
+        } finally {
+            em.close();
+        }
+    }
+
+    // --- CONTAR ---
+    public int getTareaCount() {
+        EntityManager em = getEntityManager();
+        try {
+            Query q = em.createQuery("SELECT COUNT(t) FROM Tarea t");
+            Long count = (Long) q.getSingleResult();
+            return count.intValue();
+        } finally {
+            em.close();
+        }
+    }
 }

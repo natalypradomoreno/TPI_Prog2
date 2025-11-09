@@ -12,40 +12,54 @@ package Vista;
 import javax.swing.*;
 import java.awt.*;
 
-/*
- Ventana del rol Administrador, con acceso a reportes.
+/**
+ * Ventana principal del rol Administrador.
+ * Permite acceder al panel de reportes, gestionar usuarios y cerrar sesión.
  */
 public class VentanaAdministrador extends JFrame {
 
-    private JButton btnReportes;
-    private JButton btnSalir;
-    private JPanel panelCentral;
+    private final JButton btnReportes;
+    private final JButton btnUsuarios;
+    private final JButton btnSalir;
+    private final JPanel panelCentral;
 
     public VentanaAdministrador() {
-        setTitle("Panel Administrador");
-        setSize(500, 400);
+        setTitle("Panel del Administrador");
+        setSize(700, 450);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setLayout(new BorderLayout(10, 10));
 
-        JPanel menu = new JPanel(new GridLayout(2, 1, 5, 5));
+        // ---------- Panel lateral de menú ----------
+        JPanel panelMenu = new JPanel(new GridLayout(3, 1, 5, 5));
+        panelMenu.setBorder(BorderFactory.createEmptyBorder(20, 10, 20, 10));
+
         btnReportes = new JButton("Ver Reportes");
+        btnUsuarios = new JButton("Gestionar Usuarios");
         btnSalir = new JButton("Cerrar Sesión");
 
-        menu.add(btnReportes);
-        menu.add(btnSalir);
-        add(menu, BorderLayout.WEST);
+        panelMenu.add(btnReportes);
+        panelMenu.add(btnUsuarios);
+        panelMenu.add(btnSalir);
+        add(panelMenu, BorderLayout.WEST);
 
+        // ---------- Panel central dinámico ----------
         panelCentral = new JPanel(new BorderLayout());
         add(panelCentral, BorderLayout.CENTER);
 
+        // ---------- Acciones ----------
         btnReportes.addActionListener(e -> mostrarPanel(new PanelReportes()));
+        btnUsuarios.addActionListener(e -> mostrarPanel(new PanelGestionUsuarios()));
+
         btnSalir.addActionListener(e -> {
             dispose();
             new VentanaLogin().setVisible(true);
         });
     }
 
+    /**
+     * Muestra dinámicamente el panel indicado dentro del área central.
+     */
     private void mostrarPanel(JPanel nuevo) {
         panelCentral.removeAll();
         panelCentral.add(nuevo, BorderLayout.CENTER);

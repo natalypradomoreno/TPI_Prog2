@@ -26,18 +26,29 @@ public class Administrador{
 package modelo;
 
 import javax.persistence.*;
-import java.io.Serializable;
 
+/*
+ Representa al usuario con rol de Administrador.
+ Hereda de Usuario usando la estrategia JOINED.
+ Se vincula con la tabla 'administrador', que tiene una columna PERMISOS.
+ */
 @Entity
+@PrimaryKeyJoinColumn(name = "idUsuario")
 @Table(name = "administrador")
-public class Administrador extends Usuario implements Serializable {
+public class Administrador extends Usuario {
 
+    @Column(name = "PERMISOS")
     private String permisos;
 
     public Administrador() {}
 
+    public Administrador(String username, String contrasenia, int telefono, String rol, String permisos) {
+        super(username, contrasenia, telefono, rol);
+        this.permisos = permisos;
+    }
+
     public String getPermisos() { return permisos; }
     public void setPermisos(String permisos) { this.permisos = permisos; }
-
     public void eliminarUsuario() {}
 }
+

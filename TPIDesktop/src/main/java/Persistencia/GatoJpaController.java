@@ -28,4 +28,24 @@ public class GatoJpaController implements Serializable {
     public Gato findGato(String id) { EntityManager em = getEntityManager(); Gato o = em.find(Gato.class, id); em.close(); return o; }
 
     public int getGatoCount() { EntityManager em = getEntityManager(); Query q = em.createQuery("SELECT COUNT(o) FROM Gato o"); Long c = (Long) q.getSingleResult(); em.close(); return c.intValue(); }
+    
+    public List<Gato> findGatosPorZona(String nombreZona) {
+        EntityManager em = getEntityManager();
+        Query q = em.createQuery("SELECT g FROM Gato g WHERE g.zona.nombreZona = :zona");
+        q.setParameter("zona", nombreZona);
+        List<Gato> lista = q.getResultList();
+        em.close();
+        return lista;
+    }
+
+    public List<Gato> findGatosPorEstado(String estado) {
+        EntityManager em = getEntityManager();
+        Query q = em.createQuery("SELECT g FROM Gato g WHERE g.estado = :estado");
+        q.setParameter("estado", estado);
+        List<Gato> lista = q.getResultList();
+        em.close();
+        return lista;
+    }
+
+
 }
