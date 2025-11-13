@@ -246,5 +246,10 @@ public void setEnTransito(int enTransito) {
     this.enTransito = enTransito;
 }
 
+@Override
+public String toString() {
+    return nombre; // solo muestra el nombre del gato
+}
+
 }
 

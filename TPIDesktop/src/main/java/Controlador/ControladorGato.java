@@ -4,7 +4,6 @@
  */
 package Controlador;
 
-
 import Persistencia.GatoJpaController;
 import Persistencia.JPAUtil;
 import modelo.Gato;
@@ -66,5 +65,18 @@ public void editarGato(Gato gato) {
         e.printStackTrace();
     }
 }
+public List<Gato> listarGatosPorSituacion(int situacion) {
+    EntityManager em = JPAUtil.getEMF().createEntityManager();
+
+    List<Gato> lista = em.createQuery(
+            "SELECT g FROM Gato g WHERE g.situacion = :s", 
+            Gato.class)
+            .setParameter("s", situacion)
+            .getResultList();
+
+    em.close();
+    return lista;
+}
+
 
 }

@@ -5,6 +5,7 @@ import Persistencia.UsuarioJpaController;
 import modelo.Usuario;
 import javax.persistence.*;
 import java.util.List;
+import modelo.FamiliaUsuario;
 
 /*
  Controlador para manejar los usuarios.
@@ -91,5 +92,11 @@ public class ControladorUsuarios {
 public void eliminarUsuario(int id) throws Exception {
     usuarioJpa.destroy(id);
 }
-
+  // NUEVO: para obtener el objeto familia desde usuario
+    public FamiliaUsuario obtenerFamiliaDesdeUsuario(Usuario u) {
+        if (u instanceof FamiliaUsuario) {
+            return (FamiliaUsuario) u;
+        }
+        return null;
+    }
 }

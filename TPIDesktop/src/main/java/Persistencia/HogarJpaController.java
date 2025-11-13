@@ -9,6 +9,7 @@ package Persistencia;
  * @author natal
  */
 
+
 import modelo.Hogar;
 import java.io.Serializable;
 import java.util.List;
@@ -18,7 +19,6 @@ import Persistencia.exceptions.NonexistentEntityException;
 public class HogarJpaController implements Serializable {
 
     public HogarJpaController(EntityManagerFactory emf) { this.emf = emf; }
-    public HogarJpaController() { emf = Persistence.createEntityManagerFactory("TPIPU"); }
     private EntityManagerFactory emf = null;
     public EntityManager getEntityManager() { return emf.createEntityManager(); }
 

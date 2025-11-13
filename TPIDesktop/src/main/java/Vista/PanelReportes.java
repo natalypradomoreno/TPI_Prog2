@@ -105,7 +105,7 @@ public class PanelReportes extends JPanel {
             switch (opcion) {
                 case "Gatos por Zona" -> mostrarGatosPorZona();
                 case "Gatos Esterilizados" -> mostrarGatosPorEstado("Esterilizado");
-                case "Gatos Adoptados" -> mostrarGatosPorEstado("Adoptado");
+                case "Gatos Adoptados" -> mostrarGatosAdoptados();
                 default -> txtResultados.setText("Seleccioná un reporte válido.");
             }
         }
@@ -113,6 +113,8 @@ public class PanelReportes extends JPanel {
         panelContenido.revalidate();
         panelContenido.repaint();
     }
+
+
 
     private void mostrarGatosPorZona() {
         String nombreZona = (String) cbZonas.getSelectedItem();
@@ -137,20 +139,56 @@ public class PanelReportes extends JPanel {
         }
     }
 
+   
     private void mostrarGatosPorEstado(String estado) {
-        List<Gato> gatos = controladorGato.listarGatosPorEstado(estado);
-        if (gatos.isEmpty()) {
-            txtResultados.setText("No hay gatos con estado '" + estado + "' registrados.");
-        } else {
-            StringBuilder sb = new StringBuilder("Gatos con estado '" + estado + "':\n\n");
-            for (Gato g : gatos) {
-                sb.append("• ").append(g.getNombre())
-                  .append(" | Zona: ").append(g.getZona().getNombreZona())
-                  .append("\n");
-            }
-            sb.append("\nTotal: ").append(gatos.size()).append(" gatos encontrados.");
-            txtResultados.setText(sb.toString());
-        }
+
+    // Ejemplo de uso:
+    // mostrarGatosPorEstado("Desparasitado");
+
+    List<Gato> gatos = controladorGato.listarGatosPorEstado(estado);
+
+    if (gatos.isEmpty()) {
+        txtResultados.setText("No hay gatos con estado '" + estado + "' registrados.");
+        return;
     }
+
+    StringBuilder sb = new StringBuilder("Gatos con estado '" + estado + "':\n\n");
+
+    for (Gato g : gatos) {
+        sb.append("• ").append(g.getNombre())
+          .append(" | Zona: ")
+          .append(g.getZona() != null ? g.getZona().getNombreZona() : "Sin zona")
+          .append("\n");
+    }
+
+    sb.append("\nTotal: ").append(gatos.size()).append(" gatos encontrados.");
+    txtResultados.setText(sb.toString());
+}
+
+    
+    private void mostrarGatosAdoptados() {
+    // 2 = adoptado
+    List<Gato> gatos = controladorGato.listarGatosPorSituacion(2);
+
+    if (gatos.isEmpty()) {
+        txtResultados.setText("No hay gatos adoptados registrados.");
+        return;
+    }
+
+    StringBuilder sb = new StringBuilder("Gatos Adoptados:\n\n");
+
+    for (Gato g : gatos) {
+        sb.append("• ").append(g.getNombre())
+          .append(" | Zona: ")
+          .append(g.getZona() != null ? g.getZona().getNombreZona() : "Sin zona")
+          .append("\n");
+    }
+
+    sb.append("\nTotal: ").append(gatos.size());
+    txtResultados.setText(sb.toString());
+}
+
+    
+    
 }
 

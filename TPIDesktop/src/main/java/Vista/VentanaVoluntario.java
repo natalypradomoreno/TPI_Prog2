@@ -21,6 +21,7 @@ public class VentanaVoluntario extends JFrame {
     private JButton btnRegistrarGato;
     private JButton btnRegistrarTarea;
     private JButton btnModificarGato;
+    private JButton btnSolicitudes; 
     private JButton btnVisita;
     private JButton btnSalir;
     private JPanel panelCentral;
@@ -39,6 +40,7 @@ public class VentanaVoluntario extends JFrame {
         btnRegistrarGato = new JButton("Registrar Gato");
         btnRegistrarTarea = new JButton("Registrar Tarea");
         btnModificarGato = new JButton("Modificar Estado/Situación de Gato");
+        btnSolicitudes = new JButton("Solicitudes de adopción");
         btnVisita = new JButton("Registrar Visita");
         btnSalir = new JButton("Cerrar Sesión");
 
@@ -46,6 +48,7 @@ public class VentanaVoluntario extends JFrame {
         menu.add(btnRegistrarGato);
         menu.add(btnRegistrarTarea);
         menu.add(btnModificarGato);
+        menu.add(btnSolicitudes);
         menu.add(btnVisita);
         menu.add(btnSalir);
 
@@ -59,6 +62,7 @@ public class VentanaVoluntario extends JFrame {
         btnRegistrarGato.addActionListener(e -> mostrarPanel(new PanelRegistrarGato()));
         btnRegistrarTarea.addActionListener(e -> mostrarPanel(new PanelRegistrarTarea()));
         btnModificarGato.addActionListener(e -> mostrarPanel(new PanelModificarGato()));
+        btnSolicitudes.addActionListener(e -> mostrarPanel(new PanelSolicitudesAdopcion()));
         btnVisita.addActionListener(e -> mostrarPanel(new PanelVisita()));
         btnSalir.addActionListener(e -> {
             dispose();
@@ -72,6 +76,7 @@ public class VentanaVoluntario extends JFrame {
         panelCentral.add(nuevo, BorderLayout.CENTER);
         panelCentral.revalidate();
         panelCentral.repaint();
+        this.pack();
     }
 
   
