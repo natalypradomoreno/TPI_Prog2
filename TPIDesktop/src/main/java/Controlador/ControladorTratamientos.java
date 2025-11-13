@@ -60,6 +60,7 @@ import modelo.Tratamiento;
 import Persistencia.TratamientoJpaController;
 import Persistencia.JPAUtil;
 import Persistencia.exceptions.NonexistentEntityException;
+import javax.persistence.EntityManager;
 
 public class ControladorTratamientos {
 
@@ -88,4 +89,44 @@ public class ControladorTratamientos {
     public List<Tratamiento> listarTodos() {
         return tratamientoJpa.findTratamientoEntities();
     }
+
+  public boolean guardarTratamiento(String nombre, String medicamento) {
+    EntityManager em = tratamientoJpa.getEntityManager(); 
+
+    try {
+        // Verificar si existe un tratamiento con ese nombre
+        Tratamiento existente = em.createQuery(
+                "SELECT t FROM Tratamiento t WHERE t.nombreTratamiento = :nombre",
+                Tratamiento.class)
+                .setParameter("nombre", nombre)
+                .getResultStream()
+                .findFirst()
+                .orElse(null);
+
+        if (existente != null) {
+            return false; // Ya existe → no lo guardamos
+        }
+
+        // Crear nuevo tratamiento
+        Tratamiento t = new Tratamiento();
+        t.setNombreTratamiento(nombre);
+        t.setMedicamento(medicamento);
+
+        // Guardar mediante el JpaController
+        tratamientoJpa.create(t);
+
+        return true;
+
+    } catch (Exception e) {
+        e.printStackTrace();
+        return false;
+
+    } finally {
+        em.close();
+    }
+}
+
+
+
+
 }

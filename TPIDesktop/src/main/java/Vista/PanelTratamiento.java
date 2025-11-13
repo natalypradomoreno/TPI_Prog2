@@ -9,6 +9,8 @@ package Vista;
  * @author natal
  */
 
+
+import Controlador.ControladorTratamientos;
 import javax.swing.*;
 import java.awt.*;
 
@@ -17,17 +19,14 @@ import java.awt.*;
  */
 public class PanelTratamiento extends JPanel {
 
-        private JTextField txtCodigoTratamiento;
-    private JTextField txtNombreTratamiento;
-    private JTextField txtMedicamento;
-    private JButton btnGuardar;
 
+    private final JTextField txtNombreTratamiento;
+    private final JTextField txtMedicamento;
+    private final JButton btnGuardar;
+    private final ControladorTratamientos controlador;
     public PanelTratamiento() {
         setLayout(new GridLayout(4, 2, 5, 5));
-
-        add(new JLabel("Código Tratamiento:"));
-        txtCodigoTratamiento = new JTextField();
-        add(txtCodigoTratamiento);
+         this.controlador = new ControladorTratamientos();
 
         add(new JLabel("Nombre del tratamiento:"));
         txtNombreTratamiento = new JTextField();
@@ -40,5 +39,38 @@ public class PanelTratamiento extends JPanel {
         btnGuardar = new JButton("Guardar Tratamiento");
         add(new JLabel());
         add(btnGuardar);
+        btnGuardar.addActionListener(e -> guardarTratamiento());
     }
+    private void guardarTratamiento() {
+    String nombre = txtNombreTratamiento.getText().trim();
+    String medicamento = txtMedicamento.getText().trim();
+
+    if (nombre.isEmpty()) {
+        JOptionPane.showMessageDialog(this,
+                "Completá el nombre del tratamiento.",
+                "Faltan datos",
+                JOptionPane.WARNING_MESSAGE);
+        return;
+    }
+
+    boolean ok = controlador.guardarTratamiento(nombre, medicamento);
+
+    if (ok) {
+        JOptionPane.showMessageDialog(this,
+                "Tratamiento guardado correctamente.",
+                "Éxito",
+                JOptionPane.INFORMATION_MESSAGE);
+
+        txtNombreTratamiento.setText("");
+        txtMedicamento.setText("");
+
+    } else {
+        JOptionPane.showMessageDialog(this,
+                "Ya existe un tratamiento con ese nombre.",
+                "Duplicado",
+                JOptionPane.ERROR_MESSAGE);
+    }
+}
+
+
 }

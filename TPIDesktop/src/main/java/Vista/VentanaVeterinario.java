@@ -20,8 +20,9 @@ public class VentanaVeterinario extends JFrame {
 
     private final JButton btnHistorial;
     private final JButton btnTratamiento;
+    private final JButton btnEstudio;
     private final JButton btnEmitirCertificado;
-    private JButton btnModificarGato;
+    private final JButton btnModificarGato;
     private final JButton btnSalir;
     private final JPanel panelCentral;
 
@@ -39,13 +40,15 @@ public class VentanaVeterinario extends JFrame {
         // Panel lateral con menú
         JPanel menu = new JPanel(new GridLayout(4, 1, 5, 5));
         btnHistorial = new JButton("Historial Médico");
-        btnTratamiento = new JButton("Tratamiento");
+        btnTratamiento = new JButton("Nuevo Tratamiento");
+         btnEstudio = new JButton("Nuevo Estudio");
         btnEmitirCertificado = new JButton("Emitir Certificado");
         btnSalir = new JButton("Cerrar Sesión");
     btnModificarGato = new JButton("Modificar Estado/Situación de Gato");
 
     menu.add(btnHistorial);
     menu.add(btnTratamiento);
+     menu.add(btnEstudio);
     menu.add(btnEmitirCertificado);
     menu.add(btnModificarGato);
     menu.add(btnSalir);
@@ -60,8 +63,8 @@ public class VentanaVeterinario extends JFrame {
 
         // Acciones de botones
         btnHistorial.addActionListener(e -> mostrarPanel(new PanelHistorialMedico(veterinarioLogueado)));
-
         btnTratamiento.addActionListener(e -> mostrarPanel(new PanelTratamiento()));
+         btnEstudio.addActionListener(e -> mostrarPanel(new PanelEstudio()));
         btnModificarGato.addActionListener(e -> mostrarPanel(new PanelModificarGato()));
 
         btnEmitirCertificado.addActionListener(e -> {

@@ -9,11 +9,13 @@ package Controlador;
  * @author natal
  */
 
-import java.util.List;
-import modelo.Estudios;
+
 import Persistencia.EstudiosJpaController;
 import Persistencia.JPAUtil;
-import Persistencia.exceptions.NonexistentEntityException;
+import modelo.Estudios;
+
+import javax.persistence.EntityManager;
+import java.util.List;
 
 public class ControladorEstudios {
 
@@ -23,24 +25,45 @@ public class ControladorEstudios {
         estudiosJpa = new EstudiosJpaController(JPAUtil.getEMF());
     }
 
-    public void crearEstudio(Estudios e) {
-        estudiosJpa.create(e);
-    }
+    public boolean guardarEstudio(String nombre, String descripcion) {
+        EntityManager em = estudiosJpa.getEntityManager();
 
-    public void editarEstudio(Estudios e) throws Exception {
-        estudiosJpa.edit(e);
-    }
+        try {
+            // Validar si existe uno con el mismo nombre
+            Estudios existente = em.createQuery(
+                    "SELECT e FROM Estudios e WHERE e.nombreEstudio = :nombre",
+                    Estudios.class)
+                    .setParameter("nombre", nombre)
+                    .getResultStream()
+                    .findFirst()
+                    .orElse(null);
 
-    public void eliminarEstudio(int id) throws NonexistentEntityException {
-        estudiosJpa.destroy(id);
-    }
+            if (existente != null) {
+                return false; // duplicado
+            }
 
-    public Estudios buscarPorId(int id) {
-        return estudiosJpa.findEstudios(id);
+            // Crear estudio
+            Estudios nuevo = new Estudios();
+            nuevo.setNombreEstudio(nombre);
+            nuevo.setDescripcion(descripcion);
+
+            // Guardar
+            estudiosJpa.create(nuevo);
+
+            return true;
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+
+        } finally {
+            em.close();
+        }
     }
 
     public List<Estudios> listarTodos() {
         return estudiosJpa.findEstudiosEntities();
     }
 }
+
 
