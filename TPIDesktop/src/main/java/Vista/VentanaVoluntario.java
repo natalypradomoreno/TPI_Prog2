@@ -16,6 +16,7 @@ public class VentanaVoluntario extends JFrame {
     private JButton btnModificarGato;
     private JButton btnVisita;
     private JButton btnCambiarEstadoVisita; // boton nuevo para el modulo de visitas
+    private JButton btnSolicitudesAdopcion;
     private JButton btnSalir;
 
     private JPanel panelCentral;
@@ -37,6 +38,8 @@ public class VentanaVoluntario extends JFrame {
         btnRegistrarGato = new JButton("Registrar Gato");
         btnRegistrarTarea = new JButton("Registrar Tarea");
         btnModificarGato = new JButton("Modificar Estado/Situacion de Gato");
+        btnSolicitudesAdopcion = new JButton("Solicitudes de Adopción");
+
         btnVisita = new JButton("Registrar Visita");
         btnCambiarEstadoVisita = new JButton("Cambiar Estado de Visita");
         btnSalir = new JButton("Cerrar Sesion");
@@ -45,8 +48,9 @@ public class VentanaVoluntario extends JFrame {
         menu.add(btnRegistrarGato);
         menu.add(btnRegistrarTarea);
         menu.add(btnModificarGato);
+        menu.add(btnSolicitudesAdopcion);
         menu.add(btnVisita);
-        menu.add(btnCambiarEstadoVisita); // nuevo boton
+        menu.add(btnCambiarEstadoVisita); 
         menu.add(btnSalir);
 
         add(menu, BorderLayout.WEST);
@@ -65,6 +69,9 @@ public class VentanaVoluntario extends JFrame {
         btnRegistrarGato.addActionListener(e -> mostrarPanel(new PanelRegistrarGato()));
         btnRegistrarTarea.addActionListener(e -> mostrarPanel(new PanelRegistrarTarea()));
         btnModificarGato.addActionListener(e -> mostrarPanel(new PanelModificarGato()));
+        btnSolicitudesAdopcion.addActionListener(e ->
+        mostrarPanel(new PanelSolicitudesAdopcion()));
+
         btnVisita.addActionListener(e -> mostrarPanel(new PanelVisita()));
 
         // panel nuevo para actualizar estado de visitas pendientes
