@@ -20,7 +20,7 @@ public class Estudios implements Serializable {
 
     public Estudios() {}
 
-    // Getters & Setters
+    // getters y setters
     public int getIdEstudio() { return idEstudio; }
     public void setIdEstudio(int idEstudio) { this.idEstudio = idEstudio; }
     public String getNombreEstudio() { return nombreEstudio; }

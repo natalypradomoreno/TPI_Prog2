@@ -3,8 +3,8 @@ package modelo;
 import javax.persistence.*;
 
 /*
- Representa al usuario voluntario dentro del sistema.
- Posee una reputación según su participación.
+ representa al usuario voluntario dentro del sistema
+ posee una reputacion segun su participacion
  */
 @Entity
 @PrimaryKeyJoinColumn(name = "idUsuario")

@@ -1,12 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
-
-/**
- *
- * @author natal
- */
 package Vista;
 
 import modelo.Gato;
@@ -22,7 +13,7 @@ public class PanelEmitirCertificado extends JPanel {
     private final JTextArea txtResultado;
     private final JButton btnEmitir;
     private final JButton btnCerrar;
-    private final Veterinario veterinario; // para sacar matrícula
+    private final Veterinario veterinario; 
 
     public PanelEmitirCertificado(Veterinario vet) {
         this.veterinario = vet;
@@ -51,7 +42,6 @@ public class PanelEmitirCertificado extends JPanel {
 
         btnEmitir.addActionListener(e -> emitirCertificado());
         btnCerrar.addActionListener(e -> {
-            // si esto está dentro de un JDialog
             SwingUtilities.getWindowAncestor(PanelEmitirCertificado.this).dispose();
         });
     }
@@ -73,7 +63,7 @@ public class PanelEmitirCertificado extends JPanel {
                 return;
             }
 
-            // Comparar estado
+            // comparar estado
             if (!"Sano".equalsIgnoreCase(gato.getEstado())) {
                 txtResultado.setText("El gato existe pero no está SANO.\nEstado actual: " + gato.getEstado());
                 return;

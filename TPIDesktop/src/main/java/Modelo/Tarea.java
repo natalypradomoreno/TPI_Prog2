@@ -32,7 +32,7 @@ public class Tarea implements Serializable {
     @Column(name = "ESTADO")
     private String estado;
 
-    // Estas dos columnas están mapeadas directamente en la tabla
+    // estas dos columnas estan mapeadas directamente en la tabla
     @Column(name = "VOLUNTARIO_IDUSUARIO")
     private int voluntarioIdUsuario;
 
@@ -41,7 +41,7 @@ public class Tarea implements Serializable {
 
     public Tarea() {}
 
-    // Getters & Setters
+    // getters y setters
     public int getIdTarea() { return idTarea; }
     public void setIdTarea(int idTarea) { this.idTarea = idTarea; }
 

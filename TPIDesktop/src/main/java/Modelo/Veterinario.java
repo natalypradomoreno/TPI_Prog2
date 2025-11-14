@@ -3,8 +3,8 @@ package modelo;
 import javax.persistence.*;
 
 /*
- Representa al usuario veterinario del sistema.
- Tiene una matrícula profesional.
+ representa al usuario veterinario del sistema
+ tiene una matricula profesional
  */
 @Entity
 @PrimaryKeyJoinColumn(name = "idUsuario")

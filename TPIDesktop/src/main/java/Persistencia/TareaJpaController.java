@@ -1,13 +1,5 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package Persistencia;
 
-/**
- *
- * @author natal
- */
 
 import modelo.Tarea;
 import java.io.Serializable;
@@ -19,7 +11,7 @@ public class TareaJpaController implements Serializable {
 
     private EntityManagerFactory emf = null;
 
-    // --- CONSTRUCTORES ---
+    // constructores
     public TareaJpaController(EntityManagerFactory emf) {
         this.emf = emf;
     }
@@ -28,12 +20,12 @@ public class TareaJpaController implements Serializable {
         this.emf = Persistence.createEntityManagerFactory("TPIPU");
     }
 
-    // --- OBTENER ENTITY MANAGER ---
+    // el entity manager
     public EntityManager getEntityManager() {
         return emf.createEntityManager();
     }
 
-    // --- CREAR ---
+    // crear
     public void create(Tarea tarea) {
         EntityManager em = getEntityManager();
         try {
@@ -50,7 +42,7 @@ public class TareaJpaController implements Serializable {
         }
     }
 
-    // --- EDITAR ---
+    // editar
     public void edit(Tarea tarea) throws NonexistentEntityException, Exception {
         EntityManager em = getEntityManager();
         try {
@@ -68,7 +60,7 @@ public class TareaJpaController implements Serializable {
         }
     }
 
-    // --- ELIMINAR ---
+    // borrar
     public void destroy(int id) throws NonexistentEntityException {
         EntityManager em = getEntityManager();
         try {
@@ -89,7 +81,7 @@ public class TareaJpaController implements Serializable {
         }
     }
 
-    // --- LISTAR TODAS ---
+    // listar
     public List<Tarea> findTareaEntities() {
         EntityManager em = getEntityManager();
         try {
@@ -100,7 +92,7 @@ public class TareaJpaController implements Serializable {
         }
     }
 
-    // --- BUSCAR POR ID ---
+    // buscar por id
     public Tarea findTarea(int id) {
         EntityManager em = getEntityManager();
         try {
@@ -110,7 +102,7 @@ public class TareaJpaController implements Serializable {
         }
     }
 
-    // --- CONTAR ---
+    // contar
     public int getTareaCount() {
         EntityManager em = getEntityManager();
         try {

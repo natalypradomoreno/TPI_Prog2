@@ -17,7 +17,7 @@ import Persistencia.exceptions.NonexistentEntityException;
 public class CalendarioJpaController implements Serializable {
 
     /*
-     el emf es el entitymanagerfactory que jpa usa para abrir conexiones.
+     el emf es el entitymanagerfactory que jpa usa para abrir conexiones
      hay dos constructores:
      - uno que recibe un emf (lo usamos cuando viene de JPAUtil)
      - otro que crea uno nuevo directo
@@ -30,9 +30,9 @@ public class CalendarioJpaController implements Serializable {
     public EntityManager getEntityManager() { return emf.createEntityManager(); }
 
     /*
-     create: abre transaccion, guarda un calendario y cierra.
+     create: abre transaccion, guarda un calendario y cierra
      esto se usa cuando registramos una visita nueva, porque siempre
-     se crea un objeto calendario asociado con la fecha.
+     se crea un objeto calendario asociado con la fecha
     */
     public void create(Calendario obj) {
         EntityManager em = getEntityManager();
@@ -43,8 +43,8 @@ public class CalendarioJpaController implements Serializable {
     }
 
     /*
-     edit: permite modificar un calendario ya existente.
-     no lo usamos mucho en este proyecto, pero queda por si hace falta.
+     edit: permite modificar un calendario ya existente
+     no lo usamos mucho en este proyecto, pero queda por si hace falta
     */
     public void edit(Calendario obj) throws NonexistentEntityException, Exception {
         EntityManager em = getEntityManager();
@@ -55,8 +55,8 @@ public class CalendarioJpaController implements Serializable {
     }
 
     /*
-     destroy: elimina un calendario por id.
-     tampoco lo usamos porque las visitas quedan con su registro historico.
+     destroy: elimina un calendario por id
+     tampoco lo usamos porque las visitas quedan con su registro historico
     */
     public void destroy(int id) throws NonexistentEntityException {
         EntityManager em = getEntityManager();
@@ -69,8 +69,8 @@ public class CalendarioJpaController implements Serializable {
 
     /*
      metodos de busqueda basicos: listar todos, buscar uno por id,
-     y contar cuantos hay.
-     estos siempre estan en los controllers generados por netbeans.
+     y contar cuantos hay
+     estos siempre estan en los controllers generados por netbeans
     */
     public List<Calendario> findCalendarioEntities() {
         EntityManager em = getEntityManager();

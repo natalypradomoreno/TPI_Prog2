@@ -1,14 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package Controlador;
-
-/**
- *
- * @author natal
- */
-
 
 import Persistencia.EstudiosJpaController;
 import Persistencia.JPAUtil;
@@ -29,7 +19,7 @@ public class ControladorEstudios {
         EntityManager em = estudiosJpa.getEntityManager();
 
         try {
-            // Validar si existe uno con el mismo nombre
+            // validar si existe uno con el mismo nombre
             Estudios existente = em.createQuery(
                     "SELECT e FROM Estudios e WHERE e.nombreEstudio = :nombre",
                     Estudios.class)
@@ -42,12 +32,12 @@ public class ControladorEstudios {
                 return false; // duplicado
             }
 
-            // Crear estudio
+            // crear estudio
             Estudios nuevo = new Estudios();
             nuevo.setNombreEstudio(nombre);
             nuevo.setDescripcion(descripcion);
 
-            // Guardar
+            // guardar
             estudiosJpa.create(nuevo);
 
             return true;

@@ -1,13 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package Vista;
-
-/**
- *
- * @author natal
- */
 
 import Controlador.ControladorUsuarios;
 import modelo.Usuario;
@@ -19,9 +10,9 @@ import javax.swing.*;
 import java.awt.*;
 
 /*
- Vista que representa la pantalla de inicio de sesión.
- Forma parte de la capa de Vista dentro del patrón MVC.
- Se comunica con el ControladorUsuarios para validar los datos ingresados.
+ vista que representa la pantalla de inicio de sesion
+ forma parte de la capa de Vista dentro del patron MVC
+ se comunica con el ControladorUsuarios para validar los datos ingresados
  */
 public class VentanaLogin extends JFrame {
 
@@ -77,7 +68,6 @@ public class VentanaLogin extends JFrame {
         Usuario logueado = controlador.validarUsuario(user, pass);
 
         if (logueado != null) {
-            // --- LOGS DE DEPURACIÓN ---
             System.out.println("DEBUG >> Usuario logueado: " + logueado.getUsername());
             System.out.println("DEBUG >> ID usuario: " + logueado.getIdUsuario());
             System.out.println("DEBUG >> Rol detectado: " + logueado.getRol());

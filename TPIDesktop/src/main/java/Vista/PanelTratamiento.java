@@ -1,13 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package Vista;
-
-/**
- *
- * @author natal
- */
 
 
 import Controlador.ControladorTratamientos;
@@ -15,7 +6,7 @@ import javax.swing.*;
 import java.awt.*;
 
 /*
- Panel donde el veterinario carga los tratamientos del gato.
+ panel donde el veterinario carga los tratamientos del gato
  */
 public class PanelTratamiento extends JPanel {
 

@@ -1,13 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package modelo;
-
-/**
- *
- * @author natal
- */
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -22,25 +13,25 @@ public class Postulacion implements Serializable {
     @Column(name = "idpostulacion")
     private int idPostulacion;
 
-    // ---- RELACIÓN CON HOGAR ----
+    // relacion con hogar
     @ManyToOne
     @JoinColumn(name = "idhogar", nullable = false)
     private Hogar hogar;
 
-    // ---- RELACIÓN CON GATO ----
+    // relacion con gato
     @ManyToOne
     @JoinColumn(name = "codigoQR", nullable = false)
     private Gato gato;
 
-    // ---- RELACIÓN CON FAMILIA USUARIO ----
+    // relacion con familia usuario
     @ManyToOne
     @JoinColumn(name = "idusuario", nullable = false)
     private FamiliaUsuario usuario;
 
-    // ---- DATOS DE LA POSTULACIÓN ----
+    //datos de la postulacion
     @Column(name = "tipo_postulacion")
     private int tipoPostulacion;  
-    // 1 = tránsito
+    // 1 = transito
     // 2 = adoptiva
 
     @Column(name = "fecha")
@@ -50,11 +41,11 @@ public class Postulacion implements Serializable {
     private int estado;  
     // 0 = pendiente
     // 1 = aceptada
-    // 2 = rechazada (si después querés usarlo)
+    // 2 = rechazada (si despues queres usarlo)
 
     public Postulacion() {}
 
-    // ====== GETTERS & SETTERS ======
+    // getters y setters
 
     public int getIdPostulacion() {
         return idPostulacion;

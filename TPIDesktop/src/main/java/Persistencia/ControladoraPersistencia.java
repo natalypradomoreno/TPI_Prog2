@@ -20,7 +20,7 @@ public class ControladoraPersistencia {
     private final CalendarioJpaController calendarioJpa = new CalendarioJpaController(JPAUtil.getEMF());
     private final ReporteJpaController reporteJpa = new ReporteJpaController(JPAUtil.getEMF());
 
-    // Métodos rápidos
+    // metodos rapidos
     public void crearUsuario(Usuario u) { usuarioJpa.create(u); }
     public void crearGato(Gato g) { gatoJpa.create(g); }
     public void crearVeterinario(Veterinario v) { veterinarioJpa.create(v); }

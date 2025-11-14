@@ -1,13 +1,5 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package Controlador;
 
-/**
- *
- * @author natal
- */
 import modelo.FamiliaUsuario;
 import modelo.Hogar;
 import Persistencia.FamiliaUsuarioJpaController;
@@ -44,7 +36,6 @@ public class ControladorFamilias {
         return familiaJpa.findFamiliaUsuarioEntities();
     }
 
-    // ------------------ NUEVO ------------------
 
     public void asignarHogar(FamiliaUsuario fam, Hogar hogar) throws Exception {
         fam.setHogar(hogar);

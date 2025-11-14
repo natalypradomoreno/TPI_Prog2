@@ -1,13 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
-
-/**
- *
- * @author natal
- */
-
 package Vista;
 
 import Controlador.ControladorHistorial;
@@ -23,7 +13,7 @@ import java.time.LocalTime;
 import java.util.List;
 
 /*
- Panel para que el veterinario registre una nueva atención médica de un gato.
+ panel para que el veterinario registre una nueva atencion medica de un gato
  */
 public class PanelHistorialMedico extends JPanel {
 
@@ -37,7 +27,7 @@ public class PanelHistorialMedico extends JPanel {
     private final JButton btnBuscar;
     private final JButton btnGuardar;
 
-    // Referencia al veterinario logueado
+    // referencia al veterinario logueado
     private final Veterinario veterinarioActual;
 
     private final ControladorHistorial controlador;
@@ -48,13 +38,13 @@ public class PanelHistorialMedico extends JPanel {
 
         setLayout(new BorderLayout(10, 10));
 
-        // ---------- Panel superior ----------
+        // panel superior 
         JPanel panelArriba = new JPanel(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.insets = new Insets(5, 5, 5, 5);
         gbc.fill = GridBagConstraints.HORIZONTAL;
 
-        // Fila 1: Código QR + Botón Buscar
+        // fila 1 codigo QR + boton buscar
         gbc.gridx = 0; gbc.gridy = 0;
         panelArriba.add(new JLabel("Código QR del gato:"), gbc);
 
@@ -66,7 +56,7 @@ public class PanelHistorialMedico extends JPanel {
         gbc.gridx = 2; gbc.gridy = 0;
         panelArriba.add(btnBuscar, gbc);
 
-        // Fila 2: Fecha
+        // fila 2 fecha
         gbc.gridx = 0; gbc.gridy = 1;
         panelArriba.add(new JLabel("Fecha:"), gbc);
 
@@ -77,7 +67,7 @@ public class PanelHistorialMedico extends JPanel {
         panelArriba.add(txtFecha, gbc);
         gbc.gridwidth = 1;
 
-        // Fila 3: Hora
+        // fila 3 hora
         gbc.gridx = 0; gbc.gridy = 2;
         panelArriba.add(new JLabel("Hora:"), gbc);
 
@@ -88,7 +78,7 @@ public class PanelHistorialMedico extends JPanel {
         panelArriba.add(txtHora, gbc);
         gbc.gridwidth = 1;
 
-        // Fila 4: Tratamiento
+        // fila 4 tratamiento
         gbc.gridx = 0; gbc.gridy = 3;
         panelArriba.add(new JLabel("Tratamiento:"), gbc);
 
@@ -98,7 +88,7 @@ public class PanelHistorialMedico extends JPanel {
         panelArriba.add(cbTratamiento, gbc);
         gbc.gridwidth = 1;
 
-        // Fila 5: Estudio
+        // fila 5 estudio
         gbc.gridx = 0; gbc.gridy = 4;
         panelArriba.add(new JLabel("Estudio:"), gbc);
 
@@ -108,7 +98,7 @@ public class PanelHistorialMedico extends JPanel {
         panelArriba.add(cbEstudio, gbc);
         gbc.gridwidth = 1;
 
-        // Fila 6: Archivo Adjunto
+        // fila 6 archivo adjunto
         gbc.gridx = 0; gbc.gridy = 5;
         panelArriba.add(new JLabel("Archivo adjunto:"), gbc);
 
@@ -120,22 +110,22 @@ public class PanelHistorialMedico extends JPanel {
 
         add(panelArriba, BorderLayout.NORTH);
 
-        // ---------- Panel central ----------
+        // panel central 
         txtDescripcion = new JTextArea(8, 30);
         txtDescripcion.setBorder(BorderFactory.createTitledBorder("Descripción / Diagnóstico"));
         add(new JScrollPane(txtDescripcion), BorderLayout.CENTER);
 
-        // ---------- Panel inferior ----------
+        // panel inferior 
         JPanel panelAbajo = new JPanel(new FlowLayout(FlowLayout.RIGHT));
         btnGuardar = new JButton("Guardar Atención");
         panelAbajo.add(btnGuardar);
         add(panelAbajo, BorderLayout.SOUTH);
 
-        // ---------- Listeners ----------
+        // listeners 
         btnBuscar.addActionListener(e -> buscarGato());
         btnGuardar.addActionListener(e -> guardarHistorial());
 
-        // Carga inicial de listas
+        // carga inicial de listas
         cargarCombos();
     }
 

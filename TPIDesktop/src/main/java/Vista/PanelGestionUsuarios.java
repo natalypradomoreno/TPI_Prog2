@@ -1,13 +1,5 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package Vista;
 
-/**
- *
- * @author natal
- */
 import Controlador.ControladorUsuarios;
 import modelo.Usuario;
 
@@ -17,7 +9,7 @@ import java.awt.*;
 import java.util.List;
 
 /**
- * Panel donde el administrador puede crear, ver, modificar y eliminar usuarios.
+ * panel donde el administrador puede crear, ver, modificar y eliminar usuarios
  */
 public class PanelGestionUsuarios extends JPanel {
 
@@ -40,7 +32,7 @@ public class PanelGestionUsuarios extends JPanel {
         setLayout(new BorderLayout(10, 10));
         setBorder(BorderFactory.createTitledBorder("Gestión de Usuarios"));
 
-        // -------------------- PANEL SUPERIOR: FORMULARIO --------------------
+        // panel superior formulario
         JPanel panelForm = new JPanel(new GridLayout(5, 2, 5, 5));
 
         panelForm.add(new JLabel("Usuario:"));
@@ -65,12 +57,12 @@ public class PanelGestionUsuarios extends JPanel {
 
         add(panelForm, BorderLayout.NORTH);
 
-        // -------------------- PANEL CENTRAL: TABLA --------------------
+        // panel central tabla 
         modeloTabla = new DefaultTableModel(new Object[]{"ID", "Usuario", "Rol", "Teléfono"}, 0);
         tablaUsuarios = new JTable(modeloTabla);
         add(new JScrollPane(tablaUsuarios), BorderLayout.CENTER);
 
-        // -------------------- PANEL INFERIOR: BOTONES --------------------
+        // panel inferior botones 
         JPanel panelBotones = new JPanel(new FlowLayout(FlowLayout.RIGHT));
         btnModificar = new JButton("Modificar");
         btnEliminar = new JButton("Eliminar");
@@ -78,12 +70,12 @@ public class PanelGestionUsuarios extends JPanel {
         panelBotones.add(btnEliminar);
         add(panelBotones, BorderLayout.SOUTH);
 
-        // -------------------- EVENTOS --------------------
+        // eventos 
         btnCrear.addActionListener(e -> crearUsuario());
         btnModificar.addActionListener(e -> modificarUsuario());
         btnEliminar.addActionListener(e -> eliminarUsuario());
 
-        // -------------------- CARGA INICIAL --------------------
+        // carga inicial 
         refrescarTabla();
     }
 

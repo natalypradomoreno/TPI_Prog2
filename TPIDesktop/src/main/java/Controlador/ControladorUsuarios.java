@@ -8,20 +8,20 @@ import java.util.List;
 import modelo.FamiliaUsuario;
 
 /*
- Controlador para manejar los usuarios.
- Se encarga del login y de las operaciones básicas con la tabla usuario.
+ controlador para manejar los usuarios
+ se encarga del login y de las operaciones basicas con la tabla usuario
  */
 public class ControladorUsuarios {
 
     private final UsuarioJpaController usuarioJpa;
 
     public ControladorUsuarios() {
-        // Conectamos el controlador con la capa de persistencia
+        // conectamos el controlador con la capa de persistencia
         usuarioJpa = new UsuarioJpaController(JPAUtil.getEMF());
     }
 
     /*
-     Crea un usuario nuevo en la base de datos.
+     crea un usuario nuevo en la base de datos
      */
     public void crearUsuario(Usuario u) {
         try {
@@ -33,23 +33,23 @@ public class ControladorUsuarios {
     }
 
     /*
-     Devuelve la lista completa de usuarios (por si se necesita en el panel del admin).
+     devuelve la lista completa de usuarios (por si se necesita en el panel del admin)
      */
     public List<Usuario> listarUsuarios() {
         return usuarioJpa.findUsuarioEntities();
     }
 
     /*
-     Valida si el usuario y contraseña existen en la base de datos.
-     Si todo está bien, devuelve el objeto Usuario completo.
-     Si no, devuelve null.
+     valida si el usuario y contraseña existen en la base de datos
+     si todo esta bien, devuelve el objeto Usuario completo
+     si no devuelve null
      */
     public Usuario validarUsuario(String username, String contrasenia) {
         EntityManager em = null;
         Usuario usuario = null;
 
         try {
-            // Se usa el mismo EntityManagerFactory que el resto del proyecto (desde JPAUtil)
+            // se usa el mismo EntityManagerFactory que el resto del proyecto (desde JPAUtil)
             em = JPAUtil.getEMF().createEntityManager();
 
             TypedQuery<Usuario> query = em.createQuery(
@@ -80,7 +80,7 @@ public class ControladorUsuarios {
     }
 
     /*
-     Método auxiliar si más adelante querés validar permisos por rol.
+     metodo auxiliar si mas adelante se quiere validar permisos por rol
      */
     public boolean esRol(Usuario u, String rolBuscado) {
         return u != null && u.getRol() != null && u.getRol().equalsIgnoreCase(rolBuscado);
@@ -92,7 +92,7 @@ public class ControladorUsuarios {
 public void eliminarUsuario(int id) throws Exception {
     usuarioJpa.destroy(id);
 }
-  // NUEVO: para obtener el objeto familia desde usuario
+  // para obtener el objeto familia desde usuario
     public FamiliaUsuario obtenerFamiliaDesdeUsuario(Usuario u) {
         if (u instanceof FamiliaUsuario) {
             return (FamiliaUsuario) u;

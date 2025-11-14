@@ -1,20 +1,11 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package Vista;
-
-/**
- *
- * @author natal
- */
 
 import javax.swing.*;
 import java.awt.*;
 
 /**
- * Ventana principal del rol Administrador.
- * Permite acceder al panel de reportes, gestionar usuarios y cerrar sesión.
+ * ventana principal del rol admin
+ * permite acceder al panel de reportes, gestionar usuarios y cerrar sesion
  */
 public class VentanaAdministrador extends JFrame {
 
@@ -30,7 +21,6 @@ public class VentanaAdministrador extends JFrame {
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setLayout(new BorderLayout(10, 10));
 
-        // ---------- Panel lateral de menú ----------
         JPanel panelMenu = new JPanel(new GridLayout(3, 1, 5, 5));
         panelMenu.setBorder(BorderFactory.createEmptyBorder(20, 10, 20, 10));
 
@@ -43,11 +33,9 @@ public class VentanaAdministrador extends JFrame {
         panelMenu.add(btnSalir);
         add(panelMenu, BorderLayout.WEST);
 
-        // ---------- Panel central dinámico ----------
         panelCentral = new JPanel(new BorderLayout());
         add(panelCentral, BorderLayout.CENTER);
 
-        // ---------- Acciones ----------
         btnReportes.addActionListener(e -> mostrarPanel(new PanelReportes()));
         btnUsuarios.addActionListener(e -> mostrarPanel(new PanelGestionUsuarios()));
 
@@ -57,9 +45,6 @@ public class VentanaAdministrador extends JFrame {
         });
     }
 
-    /**
-     * Muestra dinámicamente el panel indicado dentro del área central.
-     */
     private void mostrarPanel(JPanel nuevo) {
         panelCentral.removeAll();
         panelCentral.add(nuevo, BorderLayout.CENTER);

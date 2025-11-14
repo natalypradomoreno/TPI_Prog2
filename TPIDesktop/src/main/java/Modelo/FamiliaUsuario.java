@@ -1,22 +1,20 @@
 package modelo;
 /*
- Representa a la familia adoptante del sistema.
- También tiene reputación basada en adopciones previas.
+ representa a la familia adoptante del sistema
+ tambien tiene reputacion basada en adopciones previas
  */
-
-
 
 import javax.persistence.*;
 
 @Entity
 @Table(name = "familiausuario")
-@PrimaryKeyJoinColumn(name = "idUsuario")   // hereda PK de Usuario
+@PrimaryKeyJoinColumn(name = "idUsuario")   // hereda PK de usuario
 public class FamiliaUsuario extends Usuario {
 
     @Column(name = "reputacion")
     private int reputacion;
 
-    // FK hacia Hogar (idhogar en BD)
+    // FK hacia hogar (idhogar en BD)
     @ManyToOne
     @JoinColumn(name = "idhogar")
     private Hogar hogar;
@@ -28,7 +26,7 @@ public class FamiliaUsuario extends Usuario {
         this.reputacion = reputacion;
     }
 
-    // ----- GETTERS & SETTERS -----
+    // getters y setters
 
     public int getReputacion() {
         return reputacion;
@@ -46,7 +44,7 @@ public class FamiliaUsuario extends Usuario {
         this.hogar = hogar;
     }
 
-    // Métodos lógicos (si más adelante los usás realmente)
+    // metodos logicos 
     public void modificarReputacion() {}
     public void postularseAdopcion() {}
 }

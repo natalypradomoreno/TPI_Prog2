@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package Controlador;
 
 import Persistencia.GatoJpaController;
@@ -31,7 +27,7 @@ public class ControladorGato {
         return gatoJpa.findGatoEntities();
     }
 
-    // ---- NUEVOS MÉTODOS PARA REPORTES ----
+    // metodos para reportes
     public List<Gato> listarGatosPorZona(String nombreZona) {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("TPIPU");
         EntityManager em = emf.createEntityManager();

@@ -1,13 +1,5 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package Vista;
 
-/**
- *
- * @author natal
- */
 import Controlador.ControladorHogares;
 import Controlador.ControladorFamilias;
 import modelo.FamiliaUsuario;
@@ -31,9 +23,6 @@ public class PanelSeleccionHogar extends JPanel {
         setLayout(new GridLayout(12, 1, 5, 5));
         setBorder(BorderFactory.createTitledBorder("Registro de Hogar"));
 
-        // ====================================================
-        // SECCIÓN A: CREAR NUEVO HOGAR
-        // ====================================================
         add(new JLabel("CREAR NUEVO HOGAR"));
         add(new JLabel("Dirección:"));
         JTextField txtDireccion = new JTextField();
@@ -51,9 +40,6 @@ public class PanelSeleccionHogar extends JPanel {
 
         add(new JLabel("---------------------------------------"));
 
-        // ====================================================
-        // SECCIÓN B: VINCULAR HOGAR EXISTENTE
-        // ====================================================
         add(new JLabel("YA TENGO UN HOGAR REGISTRADO"));
 
         add(new JLabel("ID Hogar:"));
@@ -63,13 +49,10 @@ public class PanelSeleccionHogar extends JPanel {
         JButton btnVincular = new JButton("Vincular mi hogar");
         add(btnVincular);
 
-        // ====================================================
-        // EVENTO → CREAR HOGAR
-        // ====================================================
         btnCrear.addActionListener(e -> {
 
             String direccion = txtDireccion.getText().trim();
-            String tipo = cbTipo.getSelectedItem().toString().substring(0, 1); // “1” o “2”
+            String tipo = cbTipo.getSelectedItem().toString().substring(0, 1); 
 
             if (direccion.isEmpty()) {
                 JOptionPane.showMessageDialog(this,
@@ -99,9 +82,6 @@ public class PanelSeleccionHogar extends JPanel {
             }
         });
 
-        // ====================================================
-        // EVENTO → VINCULAR HOGAR EXISTENTE
-        // ====================================================
         btnVincular.addActionListener(e -> {
 
             String idTxt = txtIdHogar.getText().trim();
@@ -126,7 +106,7 @@ public class PanelSeleccionHogar extends JPanel {
                 return;
             }
 
-            // Buscar hogar
+            // buscar hogar
             Hogar h = controladorHogar.buscarPorId(id);
 
             if (h == null) {
@@ -137,7 +117,7 @@ public class PanelSeleccionHogar extends JPanel {
                 return;
             }
 
-            // Vincular hogar a la familia
+            // vincular hogar a la familia
             try {
                 familia.setHogar(h);
                 controladorFamilia.editarFamilia(familia);
@@ -147,7 +127,7 @@ public class PanelSeleccionHogar extends JPanel {
                         "Éxito",
                         JOptionPane.INFORMATION_MESSAGE);
 
-                // Abrir ventana de familia
+                // abrir ventana de familia
                 SwingUtilities.getWindowAncestor(this).dispose();
                 new VentanaFamilia(familia).setVisible(true);
 

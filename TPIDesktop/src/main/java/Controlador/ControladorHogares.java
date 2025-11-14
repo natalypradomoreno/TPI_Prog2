@@ -1,13 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package Controlador;
-
-/**
- *
- * @author natal
- */
 
 import modelo.Hogar;
 import Persistencia.HogarJpaController;
@@ -46,7 +37,7 @@ public class ControladorHogares {
                 .setParameter("t", tipo)
                 .getResultList();
     }
- // ---- NUEVO: crear hogar + vincular familia ----
+ // rear hogar + vincular familia
     public Hogar crearHogarVinculado(String direccion, String tipo, FamiliaUsuario fam) {
 
         EntityManager em = hogarJpa.getEntityManager();

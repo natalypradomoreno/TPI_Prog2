@@ -9,8 +9,8 @@ import javax.persistence.*;
 import java.util.List;
 
 /**
- * Controlador para gestionar las zonas del sistema.
- * Permite crear nuevas zonas, listar zonas y obtener gatos por zona.
+ * controlador para gestionar las zonas del sistema
+ * permite crear nuevas zonas, listar zonas y obtener gatos por zona
  */
 public class ControladorZonas {
 
@@ -21,10 +21,10 @@ public class ControladorZonas {
     }
 
     /**
-     * Crea una nueva zona en la base de datos.
+     * crea una nueva zona en la base de datos
      * @param nombre nombre de la zona
-     * @param ubicacionGPS coordenadas GPS o descripción de ubicación
-     * @return true si se guardó correctamente, false si hubo error
+     * @param ubicacionGPS coordenadas GPS o descripción de ubicacion
+     * @return true si se guardo correctamente o false si hubo error
      */
     public boolean crearZona(String nombre, String ubicacionGPS) {
         try {
@@ -40,22 +40,22 @@ public class ControladorZonas {
     }
 
     /**
-     * Devuelve la lista de todas las zonas registradas.
-     * (alias más legible para el uso en la vista)
+     * devuelve la lista de todas las zonas registradas
+     * (alias mas legible para el uso en la vista)
      */
     public List<Zona> listarZonas() {
         return zonaJpa.findZonaEntities();
     }
 
     /**
-     * Versión anterior del método, mantenida por compatibilidad.
+     * version anterior del metodo, mantenida por compatibilidad
      */
     public List<Zona> obtenerZonas() {
         return zonaJpa.findZonaEntities();
     }
 
     /**
-     * Devuelve la lista de gatos que pertenecen a una zona específica.
+     * devuelve la lista de gatos que pertenecen a una zona especifica
      * @param idZona ID de la zona
      * @return lista de gatos asociados a esa zona
      */

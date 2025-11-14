@@ -1,13 +1,5 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package Vista;
 
-/**
- *
- * @author natal
- */
 import Controlador.ControladorGato;
 import Controlador.ControladorPostulaciones;
 import modelo.FamiliaUsuario;
@@ -35,9 +27,8 @@ public class PanelGatosDisponibles extends JPanel {
         setLayout(new BorderLayout(10, 10));
         setBorder(BorderFactory.createTitledBorder("Gatos disponibles para postularse"));
 
-        // ===================================================
-        // PANEL SUPERIOR - COMBO
-        // ===================================================
+        // panel superior combo
+
         JPanel top = new JPanel(new FlowLayout(FlowLayout.LEFT));
         top.add(new JLabel("Seleccionar gato: "));
 
@@ -45,34 +36,27 @@ public class PanelGatosDisponibles extends JPanel {
         top.add(cbGatos);
         add(top, BorderLayout.NORTH);
 
-        // ===================================================
-        // PANEL CENTRAL - DETALLE DEL GATO
+        
+        // panel central detalle gato
         // (CREAR txtDetalle ANTES DE cargarGatosDisponibles() !!!!)
-        // ===================================================
         txtDetalle = new JTextArea(10, 40);
         txtDetalle.setEditable(false);
         txtDetalle.setBorder(BorderFactory.createTitledBorder("Detalles del gato"));
         add(new JScrollPane(txtDetalle), BorderLayout.CENTER);
 
-        // ===================================================
-        // AHORA SÍ CARGAR GATOS
-        // ===================================================
+        // ahora si cargar gatos
         cargarGatosDisponibles();
 
         cbGatos.addActionListener(e -> mostrarDetalle());
 
-        // ===================================================
-        // PANEL INFERIOR – BOTÓN
-        // ===================================================
+        // panel inferior boton
         btnPostularse = new JButton("Postularse");
         add(btnPostularse, BorderLayout.SOUTH);
 
         btnPostularse.addActionListener(e -> postular());
     }
 
-    // ============================================================
-    // CARGAR GATOS (solo situacion 0 o 1)
-    // ============================================================
+    // cargar gatos (solo situacion 0 o 1)
     private void cargarGatosDisponibles() {
         cbGatos.removeAllItems();
 
@@ -86,9 +70,7 @@ public class PanelGatosDisponibles extends JPanel {
         mostrarDetalle();
     }
 
-    // ============================================================
-    // MOSTRAR DETALLE SIN "estado"
-    // ============================================================
+    // mostrar detalle sin estado
     private void mostrarDetalle() {
         Gato g = (Gato) cbGatos.getSelectedItem();
 
@@ -108,9 +90,7 @@ public class PanelGatosDisponibles extends JPanel {
         );
     }
 
-    // ============================================================
-    // POSTULARSE (reglas finales aplicadas)
-    // ============================================================
+    // postularse
     private void postular() {
 
         Gato g = (Gato) cbGatos.getSelectedItem();
@@ -123,7 +103,7 @@ public class PanelGatosDisponibles extends JPanel {
         String tipoHogar = familia.getHogar().getTipo(); // "1" o "2"
         int situacionActual = g.getSituacion();
 
-        // REGLAS
+        // reglas
         if (tipoHogar.equals("1") && situacionActual == 1) {
             JOptionPane.showMessageDialog(this,
                     "Este gato ya está en tránsito.\nNo puede postularse.",

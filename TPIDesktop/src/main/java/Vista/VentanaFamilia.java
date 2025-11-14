@@ -1,13 +1,5 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package Vista;
 
-/**
- *
- * @author natal
- */
 
 import javax.swing.*;
 import java.awt.*;
@@ -32,28 +24,19 @@ public class VentanaFamilia extends JFrame {
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setLayout(new BorderLayout(10, 10));
 
-        // =====================================================
-        // 1. VERIFICAR SI LA FAMILIA TIENE HOGAR ASIGNADO
-        // =====================================================
         panelCentral = new JPanel(new BorderLayout());
         add(panelCentral, BorderLayout.CENTER);
 
         if (familia.getHogar() == null) {
             mostrarPanel(new PanelSeleccionHogar(familia));
-            configurarMenuBasico();  // menú sin opciones de postulaciones
-            return;  // se queda en este panel hasta vincular hogar
+            configurarMenuBasico();  
+            return;        
         }
 
-        // =====================================================
-        // 2. SI TIENE HOGAR → CARGA NORMAL DEL PANEL
-        // =====================================================
         configurarMenuCompleto();
     }
 
 
-    // ---------------------------------------------------------
-    // MENÚ cuando NO tiene hogar asignado
-    // ---------------------------------------------------------
     private void configurarMenuBasico() {
         JPanel menu = new JPanel(new GridLayout(1, 1, 5, 5));
 
@@ -69,9 +52,6 @@ public class VentanaFamilia extends JFrame {
     }
 
 
-    // ---------------------------------------------------------
-    // MENÚ COMPLETO cuando YA tiene hogar asignado
-    // ---------------------------------------------------------
     private void configurarMenuCompleto() {
 
         JPanel menu = new JPanel(new GridLayout(3, 1, 5, 5));
@@ -86,7 +66,6 @@ public class VentanaFamilia extends JFrame {
 
         add(menu, BorderLayout.WEST);
 
-        // BOTONES
         btnVisitas.addActionListener(e -> mostrarPanel(new PanelVisita()));
 
         btnGatosDisponibles.addActionListener(e -> 
@@ -102,9 +81,6 @@ public class VentanaFamilia extends JFrame {
     }
 
 
-    // ---------------------------------------------------------
-    // Método universal para cambiar paneles
-    // ---------------------------------------------------------
     private void mostrarPanel(JPanel nuevo) {
         panelCentral.removeAll();
         panelCentral.add(nuevo, BorderLayout.CENTER);

@@ -16,7 +16,7 @@ public class Tratamiento implements Serializable {
 
     public Tratamiento() {}
 
-    // Getters & Setters
+    // getters y setters
     public int getIdTratamiento() { return idTratamiento; }
     public void setIdTratamiento(int idTratamiento) { this.idTratamiento = idTratamiento; }
     public String getNombreTratamiento() { return nombreTratamiento; }

@@ -1,13 +1,5 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package Vista;
 
-/**
- *
- * @author natal
- */
 
 import Controlador.ControladorGato;
 import modelo.Gato;
@@ -18,8 +10,8 @@ import java.awt.*;
 
 
 /**
- * Panel para buscar un gato por código QR y modificar su estado y situación.
- * Puede ser usado tanto por veterinarios como voluntarios.
+ * panel para buscar un gato por codigo QR y modificar su estado y situacion
+ * puede ser usado tanto por veterinarios como voluntarios
  */
 public class PanelModificarGato extends JPanel {
 
@@ -39,7 +31,6 @@ public class PanelModificarGato extends JPanel {
         setLayout(new BorderLayout(10, 10));
         setBorder(BorderFactory.createTitledBorder("Modificar Estado y Situación de un Gato"));
 
-        // ---------- PANEL SUPERIOR ----------
         JPanel panelArriba = new JPanel(new GridLayout(5, 2, 5, 5));
 
         panelArriba.add(new JLabel("Código QR del gato:"));
@@ -72,11 +63,9 @@ public class PanelModificarGato extends JPanel {
 
         add(panelArriba, BorderLayout.CENTER);
 
-        // ---------- PANEL INFERIOR ----------
         btnGuardar = new JButton("Guardar Cambios");
         add(btnGuardar, BorderLayout.SOUTH);
 
-        // ---------- EVENTOS ----------
         btnBuscar.addActionListener(e -> buscarGato());
         btnGuardar.addActionListener(e -> guardarCambios());
     }

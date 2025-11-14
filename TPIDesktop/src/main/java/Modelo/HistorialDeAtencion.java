@@ -6,9 +6,9 @@ import java.util.Date;
 import java.util.List;
 
 /*
- Representa el registro de atención veterinaria de un gato.
- Se relaciona con el veterinario, el gato, el tratamiento y los estudios realizados.
- */
+representa el registro de atencion veterinaria de un gato
+se relaciona con el veterinario, el gato, el tratamiento y los estudios realizados
+*/
 @Entity
 @Table(name = "historial_atencion")
 public class HistorialDeAtencion implements Serializable {
@@ -32,32 +32,32 @@ public class HistorialDeAtencion implements Serializable {
     @Column(name = "HORA")
     private Date hora;
 
-    // Muchos historiales pertenecen a un gato
+    // muchos historiales pertenecen a un gato
     @ManyToOne
     @JoinColumn(name = "codigoQR", referencedColumnName = "codigoQR")
     private Gato gato;
 
-    // Muchos historiales pueden ser atendidos por un mismo veterinario
+    // muchos historiales pueden ser atendidos por un mismo veterinario
     @ManyToOne
     @JoinColumn(name = "veterinario_id", referencedColumnName = "idUsuario")
     private Veterinario veterinario;
 
-    // Cada historial puede tener un tratamiento asociado (1:1)
+    // cada historial puede tener un tratamiento asociado
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "TRATAMIENTO_IDTRATAMIENTO", referencedColumnName = "IDTRATAMIENTO")
     private Tratamiento tratamiento;
 
-    // Un historial puede tener varios estudios vinculados
+    // un historial puede tener varios estudios vinculados
     @OneToMany(mappedBy = "historial", cascade = CascadeType.ALL)
     private List<Estudios> estudios;
 
     @ManyToOne
-@JoinColumn(name = "ESTUDIO_IDESTUDIO")
-private Estudios estudio;
+    @JoinColumn(name = "ESTUDIO_IDESTUDIO")
+    private Estudios estudio;
 
     public HistorialDeAtencion() {}
 
-    // --- Getters y Setters ---
+    // getters y setters 
     public int getIdAtencion() { return idAtencion; }
     public void setIdAtencion(int idAtencion) { this.idAtencion = idAtencion; }
 

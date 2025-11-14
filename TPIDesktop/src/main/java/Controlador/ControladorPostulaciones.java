@@ -1,13 +1,5 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package Controlador;
 
-/**
- *
- * @author natal
- */
 
 import Persistencia.JPAUtil;
 import Persistencia.PostulacionJpaController;
@@ -36,14 +28,14 @@ public class ControladorPostulaciones {
     }
 
     /*
-     Crear una postulación.
-     Devuelve true si se pudo guardar correctamente.
+     crear una postulacion
+     devuelve true si se pudo guardar correctamente
      */
   public boolean crearPostulacion(Hogar hogar, Gato gato, FamiliaUsuario fam, int tipoPostulacion) {
     EntityManager em = emf.createEntityManager();
 
     try {
-        // Verificar si ya existe una postulación pendiente de ESTA familia para ESTE gato
+        // verificar si ya existe una postulacion pendiente de ESTA familia para ESTE gato
         TypedQuery<Long> query = em.createQuery(
             "SELECT COUNT(p) FROM Postulacion p " +
             "WHERE p.usuario.idUsuario = :idFam " +
@@ -57,10 +49,10 @@ public class ControladorPostulaciones {
 
         Long existe = query.getSingleResult();
         if (existe > 0) {
-            return false; // ya existe una postulación pendiente para este mismo gato
+            return false; // ya existe una postulacion pendiente para este mismo gato
         }
 
-        // Crear nueva postulación
+        // crear nueva postulacion
         Postulacion p = new Postulacion();
         p.setEstado(0); // pendiente
         p.setFecha(Date.valueOf(LocalDate.now()));
@@ -83,7 +75,7 @@ public class ControladorPostulaciones {
 
 
     /*
-     Lista todas las postulaciones pendientes.
+     lista todas las postulaciones pendientes
      */
     public List<Postulacion> listarPendientes() {
         EntityManager em = emf.createEntityManager();
@@ -100,14 +92,14 @@ public class ControladorPostulaciones {
     }
 
     /*
-     Buscar una postulación por ID.
+     buscar una postulacion por ID
      */
     public Postulacion buscarPorId(int id) {
         return postJpa.findPostulacion(id);
     }
 
     /*
-     Aceptar una postulación.
+     aceptar una postulacion
      */
     public boolean aceptarPostulacion(int id) {
         EntityManager em = emf.createEntityManager();
@@ -130,8 +122,8 @@ public class ControladorPostulaciones {
         }
     }
     /*
- Aceptar una postulación desde el objeto Postulacion directamente.
-*/
+    aceptar una postulacion desde el objeto postulacion directamente
+    */
 public boolean aceptar(Postulacion p) {
     try {
         p.setEstado(1); // aceptada
@@ -147,9 +139,9 @@ public boolean aceptar(Postulacion p) {
     
 
     /*
-     Método cancelar (no cambia nada en la BD).
+     metodo cancelar (no cambia nada en la BD)
      */
     public void cancelar() {
-        // Método vacío intencionalmente
+        // metodo vacio intencionalmente
     }
 }

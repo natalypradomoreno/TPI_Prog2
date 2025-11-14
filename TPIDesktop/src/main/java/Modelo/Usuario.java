@@ -1,32 +1,5 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
-// package com.principal.TPIWeb.Modelo;
-
-/**
- *
-
-public class Usuario {
-    private int ID_Usuario;
-
-    /**
-     * @return the ID_Usuario
-  
-    public int getID_Usuario() {
-        return ID_Usuario;
-    }
-
-    /**
-     * @param ID_Usuario the ID_Usuario to set
-  
-    public void setID_Usuario(int ID_Usuario) {
-        this.ID_Usuario = ID_Usuario;
-    }   
-}
-   */
-
 package modelo;
+
 import java.io.Serializable;
 import javax.persistence.*;
 
@@ -52,10 +25,10 @@ public class Usuario implements Serializable {
     @Column(name = "rol")
     private String rol;
 
-    // Constructor vacío requerido por JPA
+    // constructor vacio requerido por jpa
     public Usuario() {}
 
-    // Constructor completo (por si se quiere crear un usuario completo)
+    // constructor completo (por si se quiere crear un usuario completo)
     public Usuario(String username, String contrasenia, int telefono, String rol) {
         this.username = username;
         this.contrasenia = contrasenia;
@@ -63,18 +36,18 @@ public class Usuario implements Serializable {
         this.rol = rol;
     }
 
-    // Constructor corto (para carga inicial o pruebas)
+    // constructor corto (para carga inicial o pruebas)
     public Usuario(String username, String contrasenia, String rol) {
         this.username = username;
         this.contrasenia = contrasenia;
         this.rol = rol;
     }
 
-    // Métodos base
+    // metodos base
     public void iniciarSesion() {}
     public void cerrarSesion() {}
 
-    // Getters y Setters
+    // getters y setters
     public int getIdUsuario() { return idUsuario; }
     public void setIdUsuario(int idUsuario) { this.idUsuario = idUsuario; }
 

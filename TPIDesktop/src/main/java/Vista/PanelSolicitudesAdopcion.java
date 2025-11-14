@@ -1,14 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package Vista;
-
-/**
- *
- * @author natal
- */
-
 
 import Controlador.ControladorPostulaciones;
 import Controlador.ControladorGato;
@@ -43,20 +33,18 @@ public class PanelSolicitudesAdopcion extends JPanel {
         controladorPost = new ControladorPostulaciones();
         controladorGato = new ControladorGato();
 
-        // Panel principal flexible
+        // panel principal flexible
         setLayout(new BorderLayout(10, 10));
         setBorder(BorderFactory.createTitledBorder("Solicitudes de adopción pendientes"));
 
-        // ========== LISTA IZQUIERDA ==============
         modeloLista = new DefaultListModel<>();
         listaPostulaciones = new JList<>(modeloLista);
         listaPostulaciones.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 
         JScrollPane scrollLista = new JScrollPane(listaPostulaciones);
-        scrollLista.setPreferredSize(new Dimension(300, 400)); // 👈 ancho estable
+        scrollLista.setPreferredSize(new Dimension(300, 400));
         add(scrollLista, BorderLayout.WEST);
 
-        // ========== PANEL DETALLE ==============
         JPanel panelDet = new JPanel(new GridLayout(8, 1, 8, 8));
         panelDet.setBorder(BorderFactory.createTitledBorder("Detalle de la solicitud"));
 
@@ -74,7 +62,6 @@ public class PanelSolicitudesAdopcion extends JPanel {
 
         add(panelDet, BorderLayout.CENTER);
 
-    // ========== BOTONES ==============
     JPanel panelBotones = new JPanel(new FlowLayout());
     btnAceptar = new JButton("Aceptar postulación");
     btnCancelar = new JButton("Actualizar");
@@ -83,19 +70,15 @@ public class PanelSolicitudesAdopcion extends JPanel {
     panelBotones.add(btnCancelar);
     add(panelBotones, BorderLayout.SOUTH);
 
-    // ========== EVENTOS ==============
     listaPostulaciones.addListSelectionListener(e -> mostrarDetalle());
     btnAceptar.addActionListener(e -> aceptarPostulacion());
     btnCancelar.addActionListener(e -> cargarPendientes());
 
-    // ========== CARGAR POSTULACIONES (al final)
     cargarPendientes();
 }
 
 
-    // ==========================================================
-    // Cargar lista de postulaciones pendientes
-    // ==========================================================
+    // cargar lista de postulaciones pendientes
     private void cargarPendientes() {
         modeloLista.clear();
         List<Postulacion> lista = controladorPost.listarPendientes();
@@ -115,9 +98,6 @@ public class PanelSolicitudesAdopcion extends JPanel {
         lblTipoHogar.setText("Tipo de hogar:");
     }
 
-    // ==========================================================
-    // Mostrar detalle simple (estilo trainee)
-    // ==========================================================
     private void mostrarDetalle() {
         Postulacion p = listaPostulaciones.getSelectedValue();
 
@@ -139,9 +119,6 @@ public class PanelSolicitudesAdopcion extends JPanel {
         lblTipoHogar.setText("Tipo de hogar: " + tipo);
     }
 
-    // ==========================================================
-    // Aceptar postulación (versión A)
-    // ==========================================================
     private void aceptarPostulacion() {
 
         Postulacion p = listaPostulaciones.getSelectedValue();
@@ -151,12 +128,9 @@ public class PanelSolicitudesAdopcion extends JPanel {
         }
 
         Gato g = p.getGato();
-        String tipoHogar = p.getHogar().getTipo();   // "1" o "2"
-        int situacionActual = g.getSituacion();      // 0 o 1
+        String tipoHogar = p.getHogar().getTipo();  
+        int situacionActual = g.getSituacion();      
 
-        // ==== REGLAS ====
-
-        // Tipo hogar 1 → solo gatos en situación 0
         if (tipoHogar.equals("1")) {
 
             if (situacionActual == 1) {
@@ -167,18 +141,15 @@ public class PanelSolicitudesAdopcion extends JPanel {
                 return;
             }
 
-            g.setSituacion(1); // pasa a tránsito
+            g.setSituacion(1); 
         }
 
-        // Tipo hogar 2 → adopción
         if (tipoHogar.equals("2")) {
-            g.setSituacion(2); // adoptado
+            g.setSituacion(2); 
         }
 
-        // Guardar gato
         controladorGato.editarGato(g);
 
-        // Cambiar estado postulación
         controladorPost.aceptarPostulacion(p.getIdPostulacion());
 
         JOptionPane.showMessageDialog(this,
@@ -187,7 +158,7 @@ public class PanelSolicitudesAdopcion extends JPanel {
                 "Éxito",
                 JOptionPane.INFORMATION_MESSAGE);
 
-        cargarPendientes(); // actualizar lista
+        cargarPendientes(); 
     }
 }
 

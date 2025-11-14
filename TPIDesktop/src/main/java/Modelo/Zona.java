@@ -5,8 +5,8 @@ import java.io.Serializable;
 import java.util.List;
 
 /*
- Representa una zona geográfica donde se encuentra un grupo de gatos.
- Cada zona puede tener varios gatos asociados (relación 1:N).
+ representa una zona geografica donde se encuentra un grupo de gatos
+ cada zona puede tener varios gatos asociados (relacion 1:N)
  */
 @Entity
 @Table(name = "zona")
@@ -23,13 +23,13 @@ public class Zona implements Serializable {
     @Column(name = "ubicacionGPS")
     private String ubicacionGPS;
 
-    // Relación 1 a N: una zona puede tener muchos gatos
+    // relacion 1 a N: una zona puede tener muchos gatos
     @OneToMany(mappedBy = "zona", cascade = CascadeType.ALL)
     private List<Gato> gatos;
 
     public Zona() {}
 
-    // Getters & Setters
+    // getters y setters
     public int getIdZona() { return idZona; }
     public void setIdZona(int idZona) { this.idZona = idZona; }
 
@@ -43,9 +43,9 @@ public class Zona implements Serializable {
     public void setGatos(List<Gato> gatos) { this.gatos = gatos; }
 
     @Override
-public String toString() {
-    return nombreZona;
-}
+    public String toString() {
+        return nombreZona;
+    }
 
 
 

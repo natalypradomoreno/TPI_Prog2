@@ -1,20 +1,11 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package Vista;
-
-/**
- *
- * @author natal
- */
 
 import modelo.Veterinario;
 import javax.swing.*;
 import java.awt.*;
 
 /*
- Ventana del rol Veterinario con sus paneles.
+ ventana del rol veterinario con sus paneles
  */
 public class VentanaVeterinario extends JFrame {
 
@@ -37,7 +28,6 @@ public class VentanaVeterinario extends JFrame {
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setLayout(new BorderLayout(10, 10));
 
-        // Panel lateral con menú
         JPanel menu = new JPanel(new GridLayout(4, 1, 5, 5));
         btnHistorial = new JButton("Historial Médico");
         btnTratamiento = new JButton("Nuevo Tratamiento");
@@ -57,11 +47,9 @@ public class VentanaVeterinario extends JFrame {
 
         add(menu, BorderLayout.WEST);
 
-        // Panel central donde se muestran los subpaneles
         panelCentral = new JPanel(new BorderLayout());
         add(panelCentral, BorderLayout.CENTER);
 
-        // Acciones de botones
         btnHistorial.addActionListener(e -> mostrarPanel(new PanelHistorialMedico(veterinarioLogueado)));
         btnTratamiento.addActionListener(e -> mostrarPanel(new PanelTratamiento()));
          btnEstudio.addActionListener(e -> mostrarPanel(new PanelEstudio()));
@@ -80,9 +68,6 @@ public class VentanaVeterinario extends JFrame {
         });
     }
 
-    //VentanaVeterinario() {
-      //  throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    //}
 
     private void mostrarPanel(JPanel nuevo) {
         panelCentral.removeAll();

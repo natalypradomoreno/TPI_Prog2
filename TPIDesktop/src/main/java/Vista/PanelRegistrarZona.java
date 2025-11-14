@@ -1,14 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package Vista;
-
-/**
- *
- * @author natal
- */
-
 
 
 import Controlador.ControladorZonas;
@@ -16,7 +6,7 @@ import javax.swing.*;
 import java.awt.*;
 
 /**
- * Panel para registrar nuevas zonas en el sistema.
+ * panel para registrar nuevas zonas en el sistema
  */
 public class PanelRegistrarZona extends JPanel {
 
@@ -32,7 +22,6 @@ public class PanelRegistrarZona extends JPanel {
         setLayout(new BorderLayout(10, 10));
         setBorder(BorderFactory.createTitledBorder("Registrar Nueva Zona"));
 
-        // ---- PANEL DE FORMULARIO ----
         JPanel panelForm = new JPanel(new GridLayout(3, 2, 5, 5));
 
         panelForm.add(new JLabel("Nombre de Zona:"));
@@ -49,13 +38,11 @@ public class PanelRegistrarZona extends JPanel {
 
         add(panelForm, BorderLayout.NORTH);
 
-        // ---- LISTADO DE ZONAS ----
         txtListadoZonas = new JTextArea(10, 40);
         txtListadoZonas.setEditable(false);
         txtListadoZonas.setBorder(BorderFactory.createTitledBorder("Zonas Registradas"));
         add(new JScrollPane(txtListadoZonas), BorderLayout.CENTER);
 
-        // ---- EVENTOS ----
         btnGuardar.addActionListener(e -> registrarZona());
 
         refrescarListado();

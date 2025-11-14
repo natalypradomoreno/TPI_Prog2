@@ -1,13 +1,5 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package Vista;
 
-/**
- *
- * @author natal
- */
 
 import Controlador.ControladorGato;
 import Controlador.ControladorZonas;
@@ -19,11 +11,11 @@ import java.awt.*;
 import java.util.List;
 
 /**
- * Panel unificado de reportes donde el administrador puede elegir qué reporte ver:
- *  - Registrar/Ver zonas
- *  - Gatos por zona
- *  - Gatos esterilizados
- *  - Gatos adoptados
+ * panel unificado de reportes donde el administrador puede elegir que reporte ver
+ *  - registrar/Ver zonas
+ *  - gatos por zona
+ *  - gatos esterilizados
+ *  - gatos adoptados
  */
 public class PanelReportes extends JPanel {
 
@@ -42,7 +34,6 @@ public class PanelReportes extends JPanel {
         setLayout(new BorderLayout(10, 10));
         setBorder(BorderFactory.createTitledBorder("Reportes del Sistema"));
 
-        // --- PANEL SUPERIOR ---
         JPanel panelSuperior = new JPanel(new FlowLayout(FlowLayout.LEFT));
         panelSuperior.add(new JLabel("Seleccionar reporte:"));
 
@@ -54,14 +45,13 @@ public class PanelReportes extends JPanel {
         });
         panelSuperior.add(cbTipoReporte);
 
-        // Combo de zonas (solo visible en "Gatos por zona")
+        // combo de zonas (solo visible en "gatos por zona")
         cbZonas = new JComboBox<>();
         panelSuperior.add(new JLabel("Zona:"));
         panelSuperior.add(cbZonas);
 
         add(panelSuperior, BorderLayout.NORTH);
 
-        // --- PANEL CENTRAL ---
         panelContenido = new JPanel(new BorderLayout());
         txtResultados = new JTextArea(15, 40);
         txtResultados.setEditable(false);
@@ -70,7 +60,6 @@ public class PanelReportes extends JPanel {
 
         add(panelContenido, BorderLayout.CENTER);
 
-        // --- EVENTOS ---
         cbTipoReporte.addActionListener(e -> mostrarPanelSeleccionado());
         cbZonas.addActionListener(e -> {
             if (cbTipoReporte.getSelectedItem().equals("Gatos por Zona")) {
@@ -142,8 +131,8 @@ public class PanelReportes extends JPanel {
    
     private void mostrarGatosPorEstado(String estado) {
 
-    // Ejemplo de uso:
-    // mostrarGatosPorEstado("Desparasitado");
+    // ejemplo de uso:
+    // mostrarGatosPorEstado("desparasitado")
 
     List<Gato> gatos = controladorGato.listarGatosPorEstado(estado);
 

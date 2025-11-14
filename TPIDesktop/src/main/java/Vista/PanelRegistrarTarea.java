@@ -1,13 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package Vista;
-
-/**
- *
- * @author natal
- */
 
 import Controlador.ControladorTareas;
 import Controlador.ControladorGato;
@@ -24,9 +15,9 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
 /*
- Panel donde el voluntario registra una nueva tarea.
- Permite elegir tipo, fecha, hora, descripción, zona,
- y asociar un gato y un voluntario existentes.
+ panel donde el voluntario registra una nueva tarea
+ permite elegir tipo, fecha, hora, descripcion, zona,
+ y asociar un gato y un voluntario existentes
  */
 public class PanelRegistrarTarea extends JPanel {
 
@@ -49,7 +40,6 @@ public class PanelRegistrarTarea extends JPanel {
 
         setLayout(new BorderLayout(10, 10));
 
-        // ---------- PANEL SUPERIOR ----------
         JPanel panelArriba = new JPanel(new GridLayout(8, 2, 5, 5));
 
         panelArriba.add(new JLabel("Tipo de tarea:"));
@@ -70,7 +60,7 @@ public class PanelRegistrarTarea extends JPanel {
         txtDescripcion = new JTextArea(2, 15);
         panelArriba.add(txtDescripcion);
 
-        // Campo Código QR con botón buscar
+        // campo codigo QR con boton buscar
         panelArriba.add(new JLabel("Código QR del gato:"));
         JPanel panelGato = new JPanel(new BorderLayout());
         txtCodigoQR = new JTextField();
@@ -79,7 +69,7 @@ public class PanelRegistrarTarea extends JPanel {
         panelGato.add(btnBuscarGato, BorderLayout.EAST);
         panelArriba.add(panelGato);
 
-        // Campo ID Voluntario con botón buscar
+        // campo ID voluntario con boton buscar
         panelArriba.add(new JLabel("ID Voluntario:"));
         JPanel panelVol = new JPanel(new BorderLayout());
         txtIdVoluntario = new JTextField();
@@ -88,23 +78,19 @@ public class PanelRegistrarTarea extends JPanel {
         panelVol.add(btnBuscarVoluntario, BorderLayout.EAST);
         panelArriba.add(panelVol);
 
-        // Combo Zonas
+        // combo zonas
         panelArriba.add(new JLabel("Zona:"));
         cbZona = new JComboBox<>();
         panelArriba.add(cbZona);
 
         add(panelArriba, BorderLayout.NORTH);
 
-        // ---------- BOTÓN GUARDAR ----------
         btnGuardar = new JButton("Registrar Tarea");
         add(btnGuardar, BorderLayout.SOUTH);
-
-        // ---------- EVENTOS ----------
         btnBuscarGato.addActionListener(e -> buscarGato());
         btnBuscarVoluntario.addActionListener(e -> buscarVoluntario());
         btnGuardar.addActionListener(e -> guardarTarea());
 
-        // ---------- CARGA DE ZONAS ----------
         cargarZonas();
     }
 

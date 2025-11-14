@@ -1,13 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package modelo;
-
-/**
- *
- * @author natal
- */
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -28,13 +19,13 @@ public class Hogar implements Serializable {
     @Column(name = "tipo")
     private String tipo;
 
-    // Relación hacia familiausuario
+    // relacion hacia familiausuario
     @OneToMany(mappedBy = "hogar")
     private List<FamiliaUsuario> familias;
 
     public Hogar() {}
 
-    // GETTERS & SETTERS
+    // getter y setter
 
     public int getIdHogar() {
         return idHogar;

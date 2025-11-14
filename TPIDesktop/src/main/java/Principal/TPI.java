@@ -6,8 +6,8 @@ import javax.persistence.Persistence;
 import Vista.VentanaLogin;
 
 /*
- Clase principal que inicia la aplicación del sistema de gestión de gatos.
- Inicializa la conexión JPA (unidad de persistencia TPIPU) y abre la ventana de login.
+ clase principal que inicia la aplicacion del sistema de gestion de gatos
+ inicializa la conexion JPA (unidad de persistencia TPIPU) y abre la ventana de login
  */
 public class TPI {
 
@@ -16,21 +16,21 @@ public class TPI {
         EntityManager em = null;
 
         try {
-            // Inicializa la unidad de persistencia (opcional, fuerza la conexión al inicio)
+            // inicializa la unidad de persistencia (opcional, fuerza la conexion al inicio)
             emf = Persistence.createEntityManagerFactory("TPIPU");
             em = emf.createEntityManager();
-            System.out.println("Conexión JPA inicializada correctamente.");
+            System.out.println("Conexion JPA inicializada correctamente.");
 
-            // Abre la ventana principal de inicio de sesión
+            // abre la ventana principal de inicio de sesion
             javax.swing.SwingUtilities.invokeLater(() -> {
                 new VentanaLogin().setVisible(true);
             });
 
         } catch (Exception e) {
-            System.err.println("Error al iniciar la aplicación: " + e.getMessage());
+            System.err.println("Error al iniciar la aplicacion: " + e.getMessage());
             e.printStackTrace();
         } finally {
-            // Cierra la conexión si estaba abierta (por seguridad)
+            // cierra la conexion si estaba abierta (por seguridad)
             if (em != null && em.isOpen()) em.close();
             if (emf != null && emf.isOpen()) emf.close();
         }

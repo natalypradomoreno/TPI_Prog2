@@ -15,8 +15,8 @@ import java.time.LocalTime;
 import java.util.List;
 
 /*
- Controlador que maneja la lógica de registro del historial médico.
- Conecta la vista PanelHistorialMedico con las entidades del modelo y la base.
+ controlador que maneja la logica de registro del historial medico
+ conecta la vista PanelHistorialMedico con las entidades del modelo y la base
  */
 public class ControladorHistorial {
 
@@ -27,7 +27,7 @@ public class ControladorHistorial {
     }
 
     /*
-     Busca un gato en la base por su código QR.
+     busca un gato en la base por su codigo QR.
      */
     public Gato buscarGatoPorCodigo(String codigoQR) {
         EntityManager em = emf.createEntityManager();
@@ -39,7 +39,7 @@ public class ControladorHistorial {
     }
 
     /*
-     Trae todos los tratamientos cargados para llenar el combo.
+     trae todos los tratamientos cargados para llenar el combo
      */
     public List<Tratamiento> obtenerTratamientos() {
         EntityManager em = emf.createEntityManager();
@@ -51,7 +51,7 @@ public class ControladorHistorial {
     }
 
     /*
-     Trae todos los estudios cargados para llenar el combo.
+     trae todos los estudios cargados para llenar el combo
      */
     public List<Estudios> obtenerEstudios() {
         EntityManager em = emf.createEntityManager();
@@ -63,7 +63,7 @@ public class ControladorHistorial {
     }
 
     /*
-     Guarda un nuevo registro de historial médico en la base.
+     guarda un nuevo registro de historial medico en la base
      */
     public boolean guardarHistorial(String codigoQR, String descripcion,
                                 Veterinario vet, String nombreTratamiento,

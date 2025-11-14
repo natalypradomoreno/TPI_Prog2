@@ -1,12 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
-
-/**
- *
- * @author natal
- */
 package Vista;
 
 import modelo.Gato;
@@ -100,7 +91,7 @@ public class PanelRegistrarGato extends JPanel {
             gato.setColor(txtColor.getText().trim());
             gato.setCaracteristicas(txtCaracteristicas.getText().trim());
             gato.setEstado((String) cbEstado.getSelectedItem());
-            gato.setSituacion(0);           // 0 = en adopción
+            gato.setSituacion(0);           // 0 = en adopcion
             gato.setCertificadoAptitud(false); // siempre false al crear
 
             Zona zSel = (Zona) cbZona.getSelectedItem();
