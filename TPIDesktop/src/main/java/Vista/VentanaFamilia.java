@@ -56,17 +56,13 @@ public class VentanaFamilia extends JFrame {
 
         JPanel menu = new JPanel(new GridLayout(3, 1, 5, 5));
 
-        btnVisitas = new JButton("Ver Visitas");
         btnGatosDisponibles = new JButton("Gatos disponibles");
         btnSalir = new JButton("Cerrar Sesión");
 
-        menu.add(btnVisitas);
+
         menu.add(btnGatosDisponibles);
         menu.add(btnSalir);
-
         add(menu, BorderLayout.WEST);
-
-        btnVisitas.addActionListener(e -> mostrarPanel(new PanelVisita()));
 
         btnGatosDisponibles.addActionListener(e -> 
             mostrarPanel(new PanelGatosDisponibles(familia))
