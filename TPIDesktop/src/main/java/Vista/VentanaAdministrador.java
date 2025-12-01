@@ -11,6 +11,7 @@ public class VentanaAdministrador extends JFrame {
 
     private final JButton btnReportes;
     private final JButton btnUsuarios;
+    private final JButton btnMapaZonas;  
     private final JButton btnSalir;
     private final JPanel panelCentral;
 
@@ -21,16 +22,19 @@ public class VentanaAdministrador extends JFrame {
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setLayout(new BorderLayout(10, 10));
 
-        JPanel panelMenu = new JPanel(new GridLayout(3, 1, 5, 5));
+        JPanel panelMenu = new JPanel(new GridLayout(4, 1, 5, 5));
         panelMenu.setBorder(BorderFactory.createEmptyBorder(20, 10, 20, 10));
 
         btnReportes = new JButton("Ver Reportes");
         btnUsuarios = new JButton("Gestionar Usuarios");
+        btnMapaZonas = new JButton("Mapa de zonas");
         btnSalir = new JButton("Cerrar Sesión");
 
         panelMenu.add(btnReportes);
         panelMenu.add(btnUsuarios);
+        panelMenu.add(btnMapaZonas);
         panelMenu.add(btnSalir);
+
         add(panelMenu, BorderLayout.WEST);
 
         panelCentral = new JPanel(new BorderLayout());
@@ -38,6 +42,7 @@ public class VentanaAdministrador extends JFrame {
 
         btnReportes.addActionListener(e -> mostrarPanel(new PanelReportes()));
         btnUsuarios.addActionListener(e -> mostrarPanel(new PanelGestionUsuarios()));
+        btnMapaZonas.addActionListener(e -> mostrarPanel(new PanelMapaZonas())); // ← NUEVO
 
         btnSalir.addActionListener(e -> {
             dispose();
