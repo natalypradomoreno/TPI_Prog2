@@ -7,7 +7,7 @@ import Vista.VentanaLogin;
 
 /*
  clase principal que inicia la aplicacion del sistema de gestion de gatos
- inicializa la conexion JPA (unidad de persistencia TPIPU) y abre la ventana de login
+ inicializa la conexion JPA y abre la ventana de login
  */
 public class TPI {
 

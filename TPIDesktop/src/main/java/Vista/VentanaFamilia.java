@@ -76,7 +76,6 @@ public class VentanaFamilia extends JFrame {
 
     }
 
-
     private void mostrarPanel(JPanel nuevo) {
         panelCentral.removeAll();
         panelCentral.add(nuevo, BorderLayout.CENTER);
